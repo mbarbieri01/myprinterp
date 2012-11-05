@@ -2,10 +2,9 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui"
   xmlns:p1="urn:import:com.google.gwt.user.cellview.client">
   <g:HTMLPanel styleName="bodyContent">
-    <h1>Welcome to JBoss AS 7!</h1>
+    <h1>Benvenuto in PrintERP!</h1>
 
-    <p>You have successfully deployed the Errai Kitchen Sink Java EE 6 web application
-      on JBoss AS 7.</p>
+    <p>Gestione stampanti.</p>
 
     <h2>Register (Bean Validation example)</h2>
     <p>Enforces annotation-based constraints defined on the
@@ -55,11 +54,7 @@
     <p1:CellTable ui:field="membersTable" pageSize="10"/>
     <g:Label text="Table status message" ui:field="tableEmptyMessage" styleName="tableStatus"/>
 
-    <p>REST URL for all members: <a target="_blank" href="rest/members">rest/members</a></p>
     
-    <p>Note: to see Errai broadcasting push notifications, open this page in another browser (a completely
-       different browser, not just a new window in the same browser). Every member you register will
-       appear in all browsers simultaneously.</p>
     
   </g:HTMLPanel>
 </ui:UiBinder> 

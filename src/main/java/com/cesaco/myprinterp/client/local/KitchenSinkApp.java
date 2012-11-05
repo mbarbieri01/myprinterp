@@ -5,9 +5,6 @@ import java.util.List;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
-import com.cesaco.myprinterp.client.shared.Member;
-import com.cesaco.myprinterp.client.shared.MemberService;
-import com.cesaco.myprinterp.client.shared.New;
 import org.jboss.errai.bus.client.api.ErrorCallback;
 import org.jboss.errai.bus.client.api.Message;
 import org.jboss.errai.bus.client.api.RemoteCallback;
@@ -15,6 +12,9 @@ import org.jboss.errai.ioc.client.api.AfterInitialization;
 import org.jboss.errai.ioc.client.api.Caller;
 import org.jboss.errai.ioc.client.api.EntryPoint;
 
+import com.cesaco.myprinterp.client.shared.Member;
+import com.cesaco.myprinterp.client.shared.MemberService;
+import com.cesaco.myprinterp.client.shared.New;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootPanel;
 
@@ -42,6 +42,7 @@ public class KitchenSinkApp {
   private Caller<MemberService> memberService;
 
   private KitchenSinkClient kitchenSinkUi;
+  private BaseMenuClient baseMenuUi;
 
   /**
    * Builds the UI and populates the member list by making an RPC call to the server.
@@ -57,10 +58,12 @@ public class KitchenSinkApp {
   @AfterInitialization
   public void createUI() {
     kitchenSinkUi = new KitchenSinkClient(memberService);
+    baseMenuUi = new BaseMenuClient("Mattia");
     kitchenSinkUi.setTableStatusMessage("Fetching member list...");
 
-    RootPanel.get("kitchensink").add(kitchenSinkUi);
-    fetchMemberList();
+    //RootPanel.get("kitchensink").add(kitchenSinkUi);
+    RootPanel.get("kitchensink").add(baseMenuUi);
+    //fetchMemberList();
   }
 
   /**
@@ -69,9 +72,9 @@ public class KitchenSinkApp {
    *
    * @param newMember The member that was just added to the database.
    */
-  public void onMemberAdded(@Observes @New Member newMember) {
-    kitchenSinkUi.addDisplayedMember(newMember);
-  }
+//  public void onMemberAdded(@Observes @New Member newMember) {
+//    kitchenSinkUi.addDisplayedMember(newMember);
+//  }
 
   /**
    * Fetches the member list from the server, adding each member to the table in the UI.

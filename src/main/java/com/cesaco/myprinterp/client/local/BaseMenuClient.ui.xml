@@ -1,0 +1,30 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:p1="urn:import:com.google.gwt.user.cellview.client">
+<ui:style>
+.important { font-weight: bold; }
+</ui:style>
+<g:HTMLPanel>
+	<g:Label text="This is a label" horizontalAlignment="ALIGN_CENTER"/>
+	<g:VerticalPanel horizontalAlignment="ALIGN_LEFT" verticalAlignment="ALIGN_MIDDLE" width="100%" ui:field="vPanel">
+		<g:MenuBar animationEnabled="true" styleName="gwt-menubar">
+			<g:MenuItem text="New menu">
+				<g:MenuBar vertical="true" animationEnabled="true">
+					<g:MenuItem text="item1" ui:field="tab1"/>
+					<g:MenuItem text="item2"/>
+				</g:MenuBar>
+			</g:MenuItem>
+			<g:MenuItem text="New menu2">
+				<g:MenuBar vertical="true" animationEnabled="true">
+					<g:MenuItem text="item3"/>
+					<g:MenuItem text="item4"/>
+				</g:MenuBar>
+			</g:MenuItem>
+	</g:MenuBar>
+		<g:Button styleName="{style.important}" ui:field="button" />
+		<g:Button text="test Button"/>
+	</g:VerticalPanel>
+	
+
+
+</g:HTMLPanel>
+</ui:UiBinder> 
