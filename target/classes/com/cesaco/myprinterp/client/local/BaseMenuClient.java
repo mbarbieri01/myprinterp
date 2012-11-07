@@ -12,7 +12,8 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.google.gwt.user.cellview.client.CellTable;
+import com.sencha.gxt.widget.core.client.Slider;
+import com.sencha.gxt.widget.core.client.event.SelectEvent;
 
 public class BaseMenuClient extends Composite {
 
@@ -38,6 +39,14 @@ public class BaseMenuClient extends Composite {
 	
 	@UiField
 	VerticalPanel vPanel;
+	
+	@UiField
+	  Slider slider1;
+	
+	@UiHandler("slider1Button")
+	  public void slider1ButtonClicked(SelectEvent event) {
+	    slider1.setValue(40);
+	  }
 
 	public BaseMenuClient(String firstName) {
 		initWidget(uiBinder.createAndBindUi(this));

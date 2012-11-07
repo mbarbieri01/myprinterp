@@ -1,2 +1,3 @@
 # Module KitchenSink
 # RPC service class, partial path of RPC policy file
+com.google.gwt.logging.shared.RemoteLoggingService, 75C2BD0ED4D9EE2605AE7D937EB98087.gwt.rpc
