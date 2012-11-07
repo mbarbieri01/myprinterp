@@ -9,5 +9,6 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/Users/mattia/git/myprinterp/myprinterp/src/main/webapp/WEB-INF/lib/gxt-3.0.1.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

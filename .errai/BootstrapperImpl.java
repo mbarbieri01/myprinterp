@@ -43,7 +43,7 @@ public class BootstrapperImpl implements Bootstrapper {
     new CDI().initLookupTable(CDIEventTypeLookup.get());
     final BootstrapperInjectionContext injContext = new BootstrapperInjectionContext();
     CreationalContext context = injContext.getRootContext();
-    final CreationalCallback<CallerProvider> inj1755_CallerProvider_creationalCallback = new CreationalCallback<CallerProvider>() {
+    final CreationalCallback<CallerProvider> inj1757_CallerProvider_creationalCallback = new CreationalCallback<CallerProvider>() {
       public CallerProvider getInstance(final CreationalContext context) {
         Class beanType = CallerProvider.class;
         Annotation[] qualifiers = new Annotation[] { new Any() {
@@ -51,14 +51,14 @@ public class BootstrapperImpl implements Bootstrapper {
               return Any.class;
             }
         } };
-        final CallerProvider inj1748_CallerProvider = new CallerProvider();
+        final CallerProvider inj1738_CallerProvider = new CallerProvider();
         BeanRef beanRef = context.getBeanReference(beanType, qualifiers);
-        context.addBean(beanRef, inj1748_CallerProvider);
-        return inj1748_CallerProvider;
+        context.addBean(beanRef, inj1738_CallerProvider);
+        return inj1738_CallerProvider;
       }
     };
-    final CallerProvider inj1748_CallerProvider = inj1755_CallerProvider_creationalCallback.getInstance(context);
-    final CreationalCallback<RequestDispatcherProvider> inj1756_RequestDispatcherProvider_creationalCallback = new CreationalCallback<RequestDispatcherProvider>() {
+    final CallerProvider inj1738_CallerProvider = inj1757_CallerProvider_creationalCallback.getInstance(context);
+    final CreationalCallback<RequestDispatcherProvider> inj1758_RequestDispatcherProvider_creationalCallback = new CreationalCallback<RequestDispatcherProvider>() {
       public RequestDispatcherProvider getInstance(final CreationalContext context) {
         Class beanType = RequestDispatcherProvider.class;
         Annotation[] qualifiers = new Annotation[] { new Any() {
@@ -66,14 +66,14 @@ public class BootstrapperImpl implements Bootstrapper {
               return Any.class;
             }
         } };
-        final RequestDispatcherProvider inj1752_RequestDispatcherProvider = new RequestDispatcherProvider();
+        final RequestDispatcherProvider inj1746_RequestDispatcherProvider = new RequestDispatcherProvider();
         BeanRef beanRef = context.getBeanReference(beanType, qualifiers);
-        context.addBean(beanRef, inj1752_RequestDispatcherProvider);
-        return inj1752_RequestDispatcherProvider;
+        context.addBean(beanRef, inj1746_RequestDispatcherProvider);
+        return inj1746_RequestDispatcherProvider;
       }
     };
-    final RequestDispatcherProvider inj1752_RequestDispatcherProvider = inj1756_RequestDispatcherProvider_creationalCallback.getInstance(context);
-    final CreationalCallback<SenderProvider> inj1757_SenderProvider_creationalCallback = new CreationalCallback<SenderProvider>() {
+    final RequestDispatcherProvider inj1746_RequestDispatcherProvider = inj1758_RequestDispatcherProvider_creationalCallback.getInstance(context);
+    final CreationalCallback<SenderProvider> inj1759_SenderProvider_creationalCallback = new CreationalCallback<SenderProvider>() {
       public SenderProvider getInstance(final CreationalContext context) {
         Class beanType = SenderProvider.class;
         Annotation[] qualifiers = new Annotation[] { new Any() {
@@ -81,14 +81,14 @@ public class BootstrapperImpl implements Bootstrapper {
               return Any.class;
             }
         } };
-        final SenderProvider inj1750_SenderProvider = new SenderProvider();
+        final SenderProvider inj1742_SenderProvider = new SenderProvider();
         BeanRef beanRef = context.getBeanReference(beanType, qualifiers);
-        context.addBean(beanRef, inj1750_SenderProvider);
-        return inj1750_SenderProvider;
+        context.addBean(beanRef, inj1742_SenderProvider);
+        return inj1742_SenderProvider;
       }
     };
-    final SenderProvider inj1750_SenderProvider = inj1757_SenderProvider_creationalCallback.getInstance(context);
-    final CreationalCallback<KitchenSinkApp> inj1758_KitchenSinkApp_creationalCallback = new CreationalCallback<KitchenSinkApp>() {
+    final SenderProvider inj1742_SenderProvider = inj1759_SenderProvider_creationalCallback.getInstance(context);
+    final CreationalCallback<KitchenSinkApp> inj1760_KitchenSinkApp_creationalCallback = new CreationalCallback<KitchenSinkApp>() {
       public KitchenSinkApp getInstance(final CreationalContext context) {
         Class beanType = KitchenSinkApp.class;
         Annotation[] qualifiers = new Annotation[] { new Any() {
@@ -99,7 +99,7 @@ public class BootstrapperImpl implements Bootstrapper {
         final KitchenSinkApp inj116_KitchenSinkApp = new KitchenSinkApp();
         BeanRef beanRef = context.getBeanReference(beanType, qualifiers);
         context.addBean(beanRef, inj116_KitchenSinkApp);
-        com_cesaco_myprinterp_client_local_KitchenSinkApp_memberService(inj116_KitchenSinkApp, inj1748_CallerProvider.provide(new Class[] { MemberService.class }, null));
+        com_cesaco_myprinterp_client_local_KitchenSinkApp_memberService(inj116_KitchenSinkApp, inj1738_CallerProvider.provide(new Class[] { MemberService.class }, null));
         InitVotes.registerOneTimeInitCallback(new Runnable() {
           public void run() {
             GWT.runAsync(new RunAsyncCallback() {
@@ -115,8 +115,8 @@ public class BootstrapperImpl implements Bootstrapper {
         return inj116_KitchenSinkApp;
       }
     };
-    final KitchenSinkApp inj116_KitchenSinkApp = inj1758_KitchenSinkApp_creationalCallback.getInstance(context);
-    final CreationalCallback<RootPanelProvider> inj1759_RootPanelProvider_creationalCallback = new CreationalCallback<RootPanelProvider>() {
+    final KitchenSinkApp inj116_KitchenSinkApp = inj1760_KitchenSinkApp_creationalCallback.getInstance(context);
+    final CreationalCallback<RootPanelProvider> inj1761_RootPanelProvider_creationalCallback = new CreationalCallback<RootPanelProvider>() {
       public RootPanelProvider getInstance(final CreationalContext context) {
         Class beanType = RootPanelProvider.class;
         Annotation[] qualifiers = new Annotation[] { new Any() {
@@ -124,29 +124,14 @@ public class BootstrapperImpl implements Bootstrapper {
               return Any.class;
             }
         } };
-        final RootPanelProvider inj1740_RootPanelProvider = new RootPanelProvider();
+        final RootPanelProvider inj1748_RootPanelProvider = new RootPanelProvider();
         BeanRef beanRef = context.getBeanReference(beanType, qualifiers);
-        context.addBean(beanRef, inj1740_RootPanelProvider);
-        return inj1740_RootPanelProvider;
+        context.addBean(beanRef, inj1748_RootPanelProvider);
+        return inj1748_RootPanelProvider;
       }
     };
-    final RootPanelProvider inj1740_RootPanelProvider = inj1759_RootPanelProvider_creationalCallback.getInstance(context);
-    final CreationalCallback<IOCBeanManagerProvider> inj1760_IOCBeanManagerProvider_creationalCallback = new CreationalCallback<IOCBeanManagerProvider>() {
-      public IOCBeanManagerProvider getInstance(final CreationalContext context) {
-        Class beanType = IOCBeanManagerProvider.class;
-        Annotation[] qualifiers = new Annotation[] { new Any() {
-            public Class annotationType() {
-              return Any.class;
-            }
-        } };
-        final IOCBeanManagerProvider inj1744_IOCBeanManagerProvider = new IOCBeanManagerProvider();
-        BeanRef beanRef = context.getBeanReference(beanType, qualifiers);
-        context.addBean(beanRef, inj1744_IOCBeanManagerProvider);
-        return inj1744_IOCBeanManagerProvider;
-      }
-    };
-    final IOCBeanManagerProvider inj1744_IOCBeanManagerProvider = inj1760_IOCBeanManagerProvider_creationalCallback.getInstance(context);
-    final CreationalCallback<MessageBusProvider> inj1761_MessageBusProvider_creationalCallback = new CreationalCallback<MessageBusProvider>() {
+    final RootPanelProvider inj1748_RootPanelProvider = inj1761_RootPanelProvider_creationalCallback.getInstance(context);
+    final CreationalCallback<MessageBusProvider> inj1762_MessageBusProvider_creationalCallback = new CreationalCallback<MessageBusProvider>() {
       public MessageBusProvider getInstance(final CreationalContext context) {
         Class beanType = MessageBusProvider.class;
         Annotation[] qualifiers = new Annotation[] { new Any() {
@@ -154,14 +139,29 @@ public class BootstrapperImpl implements Bootstrapper {
               return Any.class;
             }
         } };
-        final MessageBusProvider inj1738_MessageBusProvider = new MessageBusProvider();
+        final MessageBusProvider inj1752_MessageBusProvider = new MessageBusProvider();
         BeanRef beanRef = context.getBeanReference(beanType, qualifiers);
-        context.addBean(beanRef, inj1738_MessageBusProvider);
-        return inj1738_MessageBusProvider;
+        context.addBean(beanRef, inj1752_MessageBusProvider);
+        return inj1752_MessageBusProvider;
       }
     };
-    final MessageBusProvider inj1738_MessageBusProvider = inj1761_MessageBusProvider_creationalCallback.getInstance(context);
-    final CreationalCallback<InstanceProvider> inj1762_InstanceProvider_creationalCallback = new CreationalCallback<InstanceProvider>() {
+    final MessageBusProvider inj1752_MessageBusProvider = inj1762_MessageBusProvider_creationalCallback.getInstance(context);
+    final CreationalCallback<IOCBeanManagerProvider> inj1763_IOCBeanManagerProvider_creationalCallback = new CreationalCallback<IOCBeanManagerProvider>() {
+      public IOCBeanManagerProvider getInstance(final CreationalContext context) {
+        Class beanType = IOCBeanManagerProvider.class;
+        Annotation[] qualifiers = new Annotation[] { new Any() {
+            public Class annotationType() {
+              return Any.class;
+            }
+        } };
+        final IOCBeanManagerProvider inj1740_IOCBeanManagerProvider = new IOCBeanManagerProvider();
+        BeanRef beanRef = context.getBeanReference(beanType, qualifiers);
+        context.addBean(beanRef, inj1740_IOCBeanManagerProvider);
+        return inj1740_IOCBeanManagerProvider;
+      }
+    };
+    final IOCBeanManagerProvider inj1740_IOCBeanManagerProvider = inj1763_IOCBeanManagerProvider_creationalCallback.getInstance(context);
+    final CreationalCallback<InstanceProvider> inj1764_InstanceProvider_creationalCallback = new CreationalCallback<InstanceProvider>() {
       public InstanceProvider getInstance(final CreationalContext context) {
         Class beanType = InstanceProvider.class;
         Annotation[] qualifiers = new Annotation[] { new Any() {
@@ -169,14 +169,14 @@ public class BootstrapperImpl implements Bootstrapper {
               return Any.class;
             }
         } };
-        final InstanceProvider inj1742_InstanceProvider = new InstanceProvider();
+        final InstanceProvider inj1754_InstanceProvider = new InstanceProvider();
         BeanRef beanRef = context.getBeanReference(beanType, qualifiers);
-        context.addBean(beanRef, inj1742_InstanceProvider);
-        return inj1742_InstanceProvider;
+        context.addBean(beanRef, inj1754_InstanceProvider);
+        return inj1754_InstanceProvider;
       }
     };
-    final InstanceProvider inj1742_InstanceProvider = inj1762_InstanceProvider_creationalCallback.getInstance(context);
-    final CreationalCallback<EventProvider> inj1763_EventProvider_creationalCallback = new CreationalCallback<EventProvider>() {
+    final InstanceProvider inj1754_InstanceProvider = inj1764_InstanceProvider_creationalCallback.getInstance(context);
+    final CreationalCallback<EventProvider> inj1765_EventProvider_creationalCallback = new CreationalCallback<EventProvider>() {
       public EventProvider getInstance(final CreationalContext context) {
         Class beanType = EventProvider.class;
         Annotation[] qualifiers = new Annotation[] { new Any() {
@@ -184,14 +184,14 @@ public class BootstrapperImpl implements Bootstrapper {
               return Any.class;
             }
         } };
-        final EventProvider inj1736_EventProvider = new EventProvider();
+        final EventProvider inj1756_EventProvider = new EventProvider();
         BeanRef beanRef = context.getBeanReference(beanType, qualifiers);
-        context.addBean(beanRef, inj1736_EventProvider);
-        return inj1736_EventProvider;
+        context.addBean(beanRef, inj1756_EventProvider);
+        return inj1756_EventProvider;
       }
     };
-    final EventProvider inj1736_EventProvider = inj1763_EventProvider_creationalCallback.getInstance(context);
-    final CreationalCallback<DisposerProvider> inj1764_DisposerProvider_creationalCallback = new CreationalCallback<DisposerProvider>() {
+    final EventProvider inj1756_EventProvider = inj1765_EventProvider_creationalCallback.getInstance(context);
+    final CreationalCallback<DisposerProvider> inj1766_DisposerProvider_creationalCallback = new CreationalCallback<DisposerProvider>() {
       public DisposerProvider getInstance(final CreationalContext context) {
         Class beanType = DisposerProvider.class;
         Annotation[] qualifiers = new Annotation[] { new Any() {
@@ -199,15 +199,15 @@ public class BootstrapperImpl implements Bootstrapper {
               return Any.class;
             }
         } };
-        final DisposerProvider inj1746_DisposerProvider = new DisposerProvider();
+        final DisposerProvider inj1744_DisposerProvider = new DisposerProvider();
         BeanRef beanRef = context.getBeanReference(beanType, qualifiers);
-        context.addBean(beanRef, inj1746_DisposerProvider);
-        org_jboss_errai_ioc_client_api_builtin_DisposerProvider_beanManager(inj1746_DisposerProvider, inj1744_IOCBeanManagerProvider.get());
-        return inj1746_DisposerProvider;
+        context.addBean(beanRef, inj1744_DisposerProvider);
+        org_jboss_errai_ioc_client_api_builtin_DisposerProvider_beanManager(inj1744_DisposerProvider, inj1740_IOCBeanManagerProvider.get());
+        return inj1744_DisposerProvider;
       }
     };
-    final DisposerProvider inj1746_DisposerProvider = inj1764_DisposerProvider_creationalCallback.getInstance(context);
-    final CreationalCallback<InitBallotProvider> inj1765_InitBallotProvider_creationalCallback = new CreationalCallback<InitBallotProvider>() {
+    final DisposerProvider inj1744_DisposerProvider = inj1766_DisposerProvider_creationalCallback.getInstance(context);
+    final CreationalCallback<InitBallotProvider> inj1767_InitBallotProvider_creationalCallback = new CreationalCallback<InitBallotProvider>() {
       public InitBallotProvider getInstance(final CreationalContext context) {
         Class beanType = InitBallotProvider.class;
         Annotation[] qualifiers = new Annotation[] { new Any() {
@@ -215,34 +215,34 @@ public class BootstrapperImpl implements Bootstrapper {
               return Any.class;
             }
         } };
-        final InitBallotProvider inj1754_InitBallotProvider = new InitBallotProvider();
+        final InitBallotProvider inj1750_InitBallotProvider = new InitBallotProvider();
         BeanRef beanRef = context.getBeanReference(beanType, qualifiers);
-        context.addBean(beanRef, inj1754_InitBallotProvider);
-        return inj1754_InitBallotProvider;
+        context.addBean(beanRef, inj1750_InitBallotProvider);
+        return inj1750_InitBallotProvider;
       }
     };
-    final InitBallotProvider inj1754_InitBallotProvider = inj1765_InitBallotProvider_creationalCallback.getInstance(context);
-    injContext.addBean(CallerProvider.class, inj1755_CallerProvider_creationalCallback, inj1748_CallerProvider, BuiltInQualifiers.DEFAULT_QUALIFIERS);
-    injContext.addBean(ContextualTypeProvider.class, inj1755_CallerProvider_creationalCallback, inj1748_CallerProvider, BuiltInQualifiers.DEFAULT_QUALIFIERS);
-    injContext.addBean(RequestDispatcherProvider.class, inj1756_RequestDispatcherProvider_creationalCallback, inj1752_RequestDispatcherProvider, BuiltInQualifiers.DEFAULT_QUALIFIERS);
-    injContext.addBean(Provider.class, inj1756_RequestDispatcherProvider_creationalCallback, inj1752_RequestDispatcherProvider, BuiltInQualifiers.DEFAULT_QUALIFIERS);
-    injContext.addBean(SenderProvider.class, inj1757_SenderProvider_creationalCallback, inj1750_SenderProvider, BuiltInQualifiers.DEFAULT_QUALIFIERS);
-    injContext.addBean(ContextualTypeProvider.class, inj1757_SenderProvider_creationalCallback, inj1750_SenderProvider, BuiltInQualifiers.DEFAULT_QUALIFIERS);
-    injContext.addBean(KitchenSinkApp.class, inj1758_KitchenSinkApp_creationalCallback, inj116_KitchenSinkApp, BuiltInQualifiers.DEFAULT_QUALIFIERS);
-    injContext.addBean(RootPanelProvider.class, inj1759_RootPanelProvider_creationalCallback, inj1740_RootPanelProvider, BuiltInQualifiers.DEFAULT_QUALIFIERS);
-    injContext.addBean(Provider.class, inj1759_RootPanelProvider_creationalCallback, inj1740_RootPanelProvider, BuiltInQualifiers.DEFAULT_QUALIFIERS);
-    injContext.addBean(IOCBeanManagerProvider.class, inj1760_IOCBeanManagerProvider_creationalCallback, inj1744_IOCBeanManagerProvider, BuiltInQualifiers.DEFAULT_QUALIFIERS);
-    injContext.addBean(Provider.class, inj1760_IOCBeanManagerProvider_creationalCallback, inj1744_IOCBeanManagerProvider, BuiltInQualifiers.DEFAULT_QUALIFIERS);
-    injContext.addBean(MessageBusProvider.class, inj1761_MessageBusProvider_creationalCallback, inj1738_MessageBusProvider, BuiltInQualifiers.DEFAULT_QUALIFIERS);
-    injContext.addBean(Provider.class, inj1761_MessageBusProvider_creationalCallback, inj1738_MessageBusProvider, BuiltInQualifiers.DEFAULT_QUALIFIERS);
-    injContext.addBean(InstanceProvider.class, inj1762_InstanceProvider_creationalCallback, inj1742_InstanceProvider, BuiltInQualifiers.DEFAULT_QUALIFIERS);
-    injContext.addBean(ContextualTypeProvider.class, inj1762_InstanceProvider_creationalCallback, inj1742_InstanceProvider, BuiltInQualifiers.DEFAULT_QUALIFIERS);
-    injContext.addBean(EventProvider.class, inj1763_EventProvider_creationalCallback, inj1736_EventProvider, BuiltInQualifiers.DEFAULT_QUALIFIERS);
-    injContext.addBean(ContextualTypeProvider.class, inj1763_EventProvider_creationalCallback, inj1736_EventProvider, BuiltInQualifiers.DEFAULT_QUALIFIERS);
-    injContext.addBean(DisposerProvider.class, inj1764_DisposerProvider_creationalCallback, inj1746_DisposerProvider, BuiltInQualifiers.DEFAULT_QUALIFIERS);
-    injContext.addBean(ContextualTypeProvider.class, inj1764_DisposerProvider_creationalCallback, inj1746_DisposerProvider, BuiltInQualifiers.DEFAULT_QUALIFIERS);
-    injContext.addBean(InitBallotProvider.class, inj1765_InitBallotProvider_creationalCallback, inj1754_InitBallotProvider, BuiltInQualifiers.DEFAULT_QUALIFIERS);
-    injContext.addBean(ContextualTypeProvider.class, inj1765_InitBallotProvider_creationalCallback, inj1754_InitBallotProvider, BuiltInQualifiers.DEFAULT_QUALIFIERS);
+    final InitBallotProvider inj1750_InitBallotProvider = inj1767_InitBallotProvider_creationalCallback.getInstance(context);
+    injContext.addBean(CallerProvider.class, inj1757_CallerProvider_creationalCallback, inj1738_CallerProvider, BuiltInQualifiers.DEFAULT_QUALIFIERS);
+    injContext.addBean(ContextualTypeProvider.class, inj1757_CallerProvider_creationalCallback, inj1738_CallerProvider, BuiltInQualifiers.DEFAULT_QUALIFIERS);
+    injContext.addBean(RequestDispatcherProvider.class, inj1758_RequestDispatcherProvider_creationalCallback, inj1746_RequestDispatcherProvider, BuiltInQualifiers.DEFAULT_QUALIFIERS);
+    injContext.addBean(Provider.class, inj1758_RequestDispatcherProvider_creationalCallback, inj1746_RequestDispatcherProvider, BuiltInQualifiers.DEFAULT_QUALIFIERS);
+    injContext.addBean(SenderProvider.class, inj1759_SenderProvider_creationalCallback, inj1742_SenderProvider, BuiltInQualifiers.DEFAULT_QUALIFIERS);
+    injContext.addBean(ContextualTypeProvider.class, inj1759_SenderProvider_creationalCallback, inj1742_SenderProvider, BuiltInQualifiers.DEFAULT_QUALIFIERS);
+    injContext.addBean(KitchenSinkApp.class, inj1760_KitchenSinkApp_creationalCallback, inj116_KitchenSinkApp, BuiltInQualifiers.DEFAULT_QUALIFIERS);
+    injContext.addBean(RootPanelProvider.class, inj1761_RootPanelProvider_creationalCallback, inj1748_RootPanelProvider, BuiltInQualifiers.DEFAULT_QUALIFIERS);
+    injContext.addBean(Provider.class, inj1761_RootPanelProvider_creationalCallback, inj1748_RootPanelProvider, BuiltInQualifiers.DEFAULT_QUALIFIERS);
+    injContext.addBean(MessageBusProvider.class, inj1762_MessageBusProvider_creationalCallback, inj1752_MessageBusProvider, BuiltInQualifiers.DEFAULT_QUALIFIERS);
+    injContext.addBean(Provider.class, inj1762_MessageBusProvider_creationalCallback, inj1752_MessageBusProvider, BuiltInQualifiers.DEFAULT_QUALIFIERS);
+    injContext.addBean(IOCBeanManagerProvider.class, inj1763_IOCBeanManagerProvider_creationalCallback, inj1740_IOCBeanManagerProvider, BuiltInQualifiers.DEFAULT_QUALIFIERS);
+    injContext.addBean(Provider.class, inj1763_IOCBeanManagerProvider_creationalCallback, inj1740_IOCBeanManagerProvider, BuiltInQualifiers.DEFAULT_QUALIFIERS);
+    injContext.addBean(InstanceProvider.class, inj1764_InstanceProvider_creationalCallback, inj1754_InstanceProvider, BuiltInQualifiers.DEFAULT_QUALIFIERS);
+    injContext.addBean(ContextualTypeProvider.class, inj1764_InstanceProvider_creationalCallback, inj1754_InstanceProvider, BuiltInQualifiers.DEFAULT_QUALIFIERS);
+    injContext.addBean(EventProvider.class, inj1765_EventProvider_creationalCallback, inj1756_EventProvider, BuiltInQualifiers.DEFAULT_QUALIFIERS);
+    injContext.addBean(ContextualTypeProvider.class, inj1765_EventProvider_creationalCallback, inj1756_EventProvider, BuiltInQualifiers.DEFAULT_QUALIFIERS);
+    injContext.addBean(DisposerProvider.class, inj1766_DisposerProvider_creationalCallback, inj1744_DisposerProvider, BuiltInQualifiers.DEFAULT_QUALIFIERS);
+    injContext.addBean(ContextualTypeProvider.class, inj1766_DisposerProvider_creationalCallback, inj1744_DisposerProvider, BuiltInQualifiers.DEFAULT_QUALIFIERS);
+    injContext.addBean(InitBallotProvider.class, inj1767_InitBallotProvider_creationalCallback, inj1750_InitBallotProvider, BuiltInQualifiers.DEFAULT_QUALIFIERS);
+    injContext.addBean(ContextualTypeProvider.class, inj1767_InitBallotProvider_creationalCallback, inj1750_InitBallotProvider, BuiltInQualifiers.DEFAULT_QUALIFIERS);
     return injContext;
   }
 }

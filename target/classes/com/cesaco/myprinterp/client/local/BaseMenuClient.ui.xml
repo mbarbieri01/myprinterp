@@ -10,7 +10,7 @@
 			<g:MenuItem text="New menu">
 				<g:MenuBar vertical="true" animationEnabled="true">
 					<g:MenuItem text="item1" ui:field="tab1"/>
-					<g:MenuItem text="item2"/>
+					<g:MenuItem text="item2" ui:field="tab2"/>
 				</g:MenuBar>
 			</g:MenuItem>
 			<g:MenuItem text="New menu2">
