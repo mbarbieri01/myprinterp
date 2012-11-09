@@ -1,15 +1,16 @@
 package com.cesaco.myprinterp.client.local;
 
+import com.cesaco.myprinterp.client.forms.GruppoFormClient;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.MenuItem;
+import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.sencha.gxt.widget.core.client.Slider;
@@ -58,7 +59,13 @@ public class BaseMenuClient extends Composite {
 
 	@UiHandler("button")
 	void onButtonClick(ClickEvent e) {
-		Window.alert("Hello!");
+		
+		GruppoFormClient gfc = new GruppoFormClient();
+		PopupPanel pp = new PopupPanel();
+		pp.add(gfc);
+		pp.center();
+		pp.setGlassEnabled(true);
+		pp.show();
 	}
 	
 	
@@ -83,7 +90,7 @@ public class BaseMenuClient extends Composite {
 	             mp.setGlassEnabled(true);
 	             mp.center();
 	             mp.show();
-	             
+
 	       }
      };
 
