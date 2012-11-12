@@ -39,8 +39,9 @@ public class GruppoFormClient extends Composite {
 	
 	private VerticalPanel vp;
 	
-	@Inject
+	
 	private Caller<GruppoService> gruppoService;
+	
 	private final List<Gruppo> gruppi = new ArrayList<Gruppo>();
 	 
 	  public Widget asWidget() {
@@ -52,8 +53,8 @@ public class GruppoFormClient extends Composite {
 	    return vp;
 	  }
 	  
-	  public GruppoFormClient() {
-		  
+	  public GruppoFormClient(Caller<GruppoService> gruppoService) {
+		  this.gruppoService = gruppoService;
 		  if (vp == null) {
 		      vp = new VerticalPanel();
 		      vp.setSpacing(10);
@@ -108,12 +109,15 @@ public class GruppoFormClient extends Composite {
 	    des_gruppoError = new Label();
 	    p.add(des_gruppoError);
 	    
+	    registerConfirmMessage = new Label();
+	    p.add(registerConfirmMessage);
 	    final Actions ac = new Actions();
 
 	    form.addButton(new TextButton("Salva", new SelectEvent.SelectHandler() {
 			
 			@Override
 			public void onSelect(SelectEvent event) {
+				registerConfirmMessage.setText("Sto inserendo.");
 				Info.display("pressed","OK");
 				
 				ac.registerGruppo();
@@ -135,7 +139,8 @@ public class GruppoFormClient extends Composite {
 //	  }
 	  
 	  private void registerGruppo() {
-		  Info.display("ERROR", "inizio registerGruppo");
+		  registerConfirmMessage.setText("sono nel registerGruppo");
+		  Info.display("ERROR1", "inizio registerGruppo");
 		  Gruppo newGruppo = new Gruppo();
 		  newGruppo.setCod_gruppo(cod_gruppo.getText());
 		  newGruppo.setDes_gruppo(des_gruppo.getText());
@@ -146,6 +151,7 @@ public class GruppoFormClient extends Composite {
 		    
 		    ////////ERRORE qui
 		    Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+		    Info.display("ERROR3b", "creato validator");
 		    Set<ConstraintViolation<Gruppo>> violations = validator.validate(newGruppo);
 		    /////////####
 		    Info.display("ERROR4", "inizio registerGruppo");
@@ -160,9 +166,9 @@ public class GruppoFormClient extends Composite {
 		      }
 		    }
 
-		    Info.display("ERROR", "ci sono problemi sul validator: Gruppo.class");
+		    Info.display("ERROR5", "ci sono problemi sul validator: Gruppo.class");
 		    if (!violations.isEmpty()) return;
-
+		    Info.display("ERROR6", "validation not empty");
 		    gruppoService.call(
 		        new RemoteCallback<Void>() {
 		          @Override
@@ -178,6 +184,7 @@ public class GruppoFormClient extends Composite {
 		            @Override
 		            public boolean error(Message message, Throwable throwable) {
 		              registerConfirmMessage.setText("Inserimento fallito: " + throwable.getMessage());
+		              registerConfirmMessage.setStyleName("errorMessage");
 		              return false;
 		            }
 		          }).register(newGruppo);

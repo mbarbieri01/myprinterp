@@ -3,8 +3,9 @@ package com.cesaco.myprinterp.client.local;
 import javax.validation.Validator;
 import javax.validation.groups.Default;
 
+import com.cesaco.myprinterp.client.shared.Gruppo;
+import com.cesaco.myprinterp.client.shared.Macchina;
 import com.cesaco.myprinterp.client.shared.Member;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.validation.client.AbstractGwtValidatorFactory;
 import com.google.gwt.validation.client.GwtValidation;
@@ -20,7 +21,7 @@ import com.google.gwt.validation.client.impl.AbstractGwtValidator;
  */
 public final class KitchenSinkValidatorFactory extends AbstractGwtValidatorFactory {
 
-  @GwtValidation(value = Member.class, groups = {Default.class})
+  @GwtValidation(value = {Member.class,Gruppo.class, Macchina.class}, groups = {Default.class})
   public interface GwtValidator extends Validator {
   }
 

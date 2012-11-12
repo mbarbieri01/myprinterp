@@ -3,6 +3,7 @@ package com.cesaco.myprinterp.client.shared;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -31,7 +32,7 @@ public class Macchina implements Serializable {
 	private String cod_art_gest;
 	private String des_macchina;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(referencedColumnName="id")
 	private Gruppo gruppo;
 	

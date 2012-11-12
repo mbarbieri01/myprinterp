@@ -1,6 +1,11 @@
 package com.cesaco.myprinterp.client.local;
 
+import org.jboss.errai.ioc.client.api.Caller;
+
 import com.cesaco.myprinterp.client.forms.GruppoFormClient;
+import com.cesaco.myprinterp.client.forms.MacchinaFormClient;
+import com.cesaco.myprinterp.client.shared.GruppoService;
+import com.cesaco.myprinterp.client.shared.MacchinaService;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -18,6 +23,9 @@ import com.sencha.gxt.widget.core.client.event.SelectEvent;
 
 public class BaseMenuClient extends Composite {
 
+	private Caller<GruppoService> gruppoService;
+	private Caller<MacchinaService> macchinaService;
+	
 	private static BaseMenuClientUiBinder uiBinder = GWT
 			.create(BaseMenuClientUiBinder.class);
 	
@@ -33,10 +41,10 @@ public class BaseMenuClient extends Composite {
 	Button button;
 	
 	@UiField
-	MenuItem tab1;
+	MenuItem at_macchina_tab;
 	
 	@UiField
-	MenuItem tab2;
+	MenuItem at_gruppo_tab;
 	
 	@UiField
 	VerticalPanel vPanel;
@@ -49,18 +57,19 @@ public class BaseMenuClient extends Composite {
 	    slider1.setValue(40);
 	  }
 
-	public BaseMenuClient(String firstName) {
+	public BaseMenuClient(Caller<GruppoService> gruppoService, Caller<MacchinaService> macchinaService) {
+		this.gruppoService = gruppoService;
+		this.macchinaService = macchinaService;
 		initWidget(uiBinder.createAndBindUi(this));
-		button.setText(firstName);
-		tab1.setText("tab1item");
-		tab1.setCommand(cmdBtnLogout);
-		tab2.setCommand(cmdBtn2);
+		button.setText("prova");
+		at_macchina_tab.setCommand(cmdAt_macchina_tab);
+		at_gruppo_tab.setCommand(cmdAt_gruppo_tab);
 	}
 
 	@UiHandler("button")
 	void onButtonClick(ClickEvent e) {
 		
-		GruppoFormClient gfc = new GruppoFormClient();
+		GruppoFormClient gfc = new GruppoFormClient(gruppoService);
 		PopupPanel pp = new PopupPanel();
 		pp.add(gfc);
 		pp.center();
@@ -78,18 +87,25 @@ public class BaseMenuClient extends Composite {
 		return button.getText();
 	}
 	
-	Command cmdBtnLogout = new Command() {
+	Command cmdAt_macchina_tab = new Command() {
 		         public void execute() {
-		             vPanel.add(new InnerEntity1());
+		        	MacchinaFormClient mfc = new MacchinaFormClient(macchinaService, gruppoService);
+		     		PopupPanel pp = new PopupPanel();
+		     		pp.add(mfc);
+		     		pp.center();
+		     		pp.setGlassEnabled(true);
+		     		pp.show();
 		       }
 	     };
 	     
-	Command cmdBtn2 = new Command() {
+	Command cmdAt_gruppo_tab = new Command() {
 	         public void execute() {
-	             MyPopup1 mp = new MyPopup1();
-	             mp.setGlassEnabled(true);
-	             mp.center();
-	             mp.show();
+	        	GruppoFormClient gfc = new GruppoFormClient(gruppoService);
+	     		PopupPanel pp = new PopupPanel();
+	     		pp.add(gfc);
+	     		pp.center();
+	     		pp.setGlassEnabled(true);
+	     		pp.show();
 
 	       }
      };

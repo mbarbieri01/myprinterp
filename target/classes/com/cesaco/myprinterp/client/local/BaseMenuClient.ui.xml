@@ -8,10 +8,10 @@ xmlns:client="urn:import:com.sencha.gxt.widget.core.client" xmlns:button="urn:im
 	<g:Label text="This is a label" horizontalAlignment="ALIGN_CENTER"/>
 	<g:VerticalPanel horizontalAlignment="ALIGN_LEFT" verticalAlignment="ALIGN_MIDDLE" width="100%" ui:field="vPanel">
 		<g:MenuBar animationEnabled="true" styleName="gwt-menubar">
-			<g:MenuItem text="New menu">
+			<g:MenuItem text="Gestione Macchine">
 				<g:MenuBar vertical="true" animationEnabled="true">
-					<g:MenuItem text="item1" ui:field="tab1"/>
-					<g:MenuItem text="item2" ui:field="tab2"/>
+					<g:MenuItem text="AT_MACCHINA" ui:field="at_macchina_tab"/>
+					<g:MenuItem text="AT_GRUPPO" ui:field="at_gruppo_tab"/>
 				</g:MenuBar>
 			</g:MenuItem>
 			<g:MenuItem text="New menu2">
