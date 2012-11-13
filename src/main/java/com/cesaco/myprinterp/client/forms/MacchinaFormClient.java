@@ -1,7 +1,6 @@
 package com.cesaco.myprinterp.client.forms;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -52,6 +51,8 @@ public class MacchinaFormClient extends Composite {
 	private Caller<GruppoService> gruppoService;
 
 	private final List<Macchina> macchine = new ArrayList<Macchina>();
+	
+	private final Actions ac = new Actions();
 
 	public Widget asWidget() {
 		if (vp == null) {
@@ -81,10 +82,12 @@ public class MacchinaFormClient extends Composite {
 	private TextField cod_macchina;
 	private TextField cod_art_gest;
 	private TextField des_macchina;
+	private ComboBox<Gruppo> comboGruppi;
 
 	private Label cod_macchinaError;
 	private Label cod_art_gestError;
 	private Label des_macchinaError;
+	private Label cod_gruppoError;
 	private Label registerConfirmMessage;
 
 	interface GruppoProperties extends PropertyAccess<Gruppo> {
@@ -92,9 +95,13 @@ public class MacchinaFormClient extends Composite {
 
 		LabelProvider<Gruppo> name();
 	}
+	
+	private ListStore<Gruppo> gruppi;
 
 	private void createForm() {
-
+		//ac = new Actions();
+		tempGruppoList = new ArrayList<Gruppo>();
+		
 		FramedPanel form = new FramedPanel();
 		form.setHeadingText("Gestione Macchina");
 		form.setWidth(350);
@@ -150,14 +157,16 @@ public class MacchinaFormClient extends Composite {
 		// COMBO BOX GRUPPI
 		GruppoProperties propsGruppo = GWT.create(GruppoProperties.class);
 		// Combo box
-		ListStore<Gruppo> gruppi = new ListStore<Gruppo>(propsGruppo.abbr());
+		gruppi = new ListStore<Gruppo>(propsGruppo.abbr());
 
 		// !!! devo popolare la lista di gruppi!!!!!!
 		//###################
-		//gruppi.addAll(getAllGruppo());
+		getAllGruppo();
+		
+		//gruppi.addAll(ac.getGruppoList());
 		//################
 
-		ComboBox<Gruppo> comboGruppi = new ComboBox<Gruppo>(gruppi,
+		comboGruppi = new ComboBox<Gruppo>(gruppi,
 				propsGruppo.name());
 		addHandlersForEventObservation(comboGruppi, propsGruppo.name());
 
@@ -167,10 +176,10 @@ public class MacchinaFormClient extends Composite {
 		comboGruppi.setTriggerAction(TriggerAction.ALL);
 		p.add(comboGruppi);
 		// END COMBO BOX GRUPPI
-		
+		cod_gruppoError = new Label();
+		p.add(cod_gruppoError);
 		registerConfirmMessage = new Label();
 		p.add(registerConfirmMessage);
-		final Actions ac = new Actions();
 
 		form.addButton(new TextButton("Salva", new SelectEvent.SelectHandler() {
 
@@ -186,16 +195,23 @@ public class MacchinaFormClient extends Composite {
 
 		vp.add(form);
 	}
-
-	private List<Gruppo> tempGruppoList = null;
 	
-	private Collection<? extends Gruppo> getAllGruppo() {
+	//Actions ac;
+
+	List<Gruppo> tempGruppoList;
+	
+	
+	
+	private void getAllGruppo() {
 		
 		gruppoService.call(new RemoteCallback<List<Gruppo>>() {
 		      @Override
 		      public void callback(List<Gruppo> response) {
 		        GWT.log("Got gruppo list. Size: " + response.size());
-		        tempGruppoList = response;
+		        gruppi.addAll(response);
+		        //ac.setTempGruppoList(response);
+		        Info.display("INFO", "hashcode  = " + ac.hashCode() );
+		        Info.display("INFO", "in getAllGruppo(). response.size = "+response.size());
 		      }
 		    },
 		    new ErrorCallback() {
@@ -205,7 +221,8 @@ public class MacchinaFormClient extends Composite {
 		        return false;
 		      }
 		    }).retrieveAllGruppoOrderedByName();
-		return tempGruppoList;
+		Info.display("INFO", "CHiamato gruppoService.retrieve");
+		
 	}
 
 	private <T> void addHandlersForEventObservation(ComboBox<T> combo,
@@ -235,7 +252,23 @@ public class MacchinaFormClient extends Composite {
 	}
 
 	private class Actions {
+		
+		private final List<Gruppo> gruppoList = new ArrayList<Gruppo>();
+		
+		public void setTempGruppoList(List<Gruppo> gruppoList) {
+			Info.display("INFO", "gruppoList size from actions: "+gruppoList.size());
+			this.gruppoList.clear();
+			Info.display("INFO", "hashcode  = " + this.hashCode() );
+			for (int i = 0; i < gruppoList.size(); i++) {
+				this.gruppoList.add(gruppoList.get(i));
+			}
+		}
 
+		public List<Gruppo> getGruppoList() {
+			Info.display("INFO - ACTIONS", gruppoList != null ? ""+gruppoList.size() : "gruppoList is null");
+			return gruppoList;
+		}
+		
 		private void closeForm() {
 			removeFromParent();
 		}
@@ -246,10 +279,12 @@ public class MacchinaFormClient extends Composite {
 			newMacchina.setCod_macchina(cod_macchina.getText());
 			newMacchina.setCod_art_gest(cod_art_gest.getText());
 			newMacchina.setDes_macchina(des_macchina.getText());
+			newMacchina.setGruppo(comboGruppi.getCurrentValue());
 
 			cod_macchinaError.setText("");
 			cod_art_gestError.setText("");
 			des_macchinaError.setText("");
+			cod_gruppoError.setText("");
 
 			// //////ERRORE qui
 			Validator validator = Validation.buildDefaultValidatorFactory()
@@ -266,6 +301,8 @@ public class MacchinaFormClient extends Composite {
 					cod_art_gestError.setText(cv.getMessage());
 				} else if (prop.equals("des_macchina")) {
 					des_macchinaError.setText(cv.getMessage());
+				} else if (prop.equals("cod_gruppo")) {
+					cod_gruppoError.setText(cv.getMessage());
 				} else {
 					Info.display("OK", cv.getMessage());
 				}
