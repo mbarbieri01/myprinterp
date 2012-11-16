@@ -16,6 +16,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.ui.PopupPanel;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.sencha.gxt.widget.core.client.Slider;
@@ -90,11 +91,13 @@ public class BaseMenuClient extends Composite {
 	Command cmdAt_macchina_tab = new Command() {
 		         public void execute() {
 		        	MacchinaFormClient mfc = new MacchinaFormClient(macchinaService, gruppoService);
-		     		PopupPanel pp = new PopupPanel();
-		     		pp.add(mfc);
-		     		pp.center();
-		     		pp.setGlassEnabled(true);
-		     		pp.show();
+		        	//initWidget(mfc);
+		        	RootPanel.get().add(mfc.asWidget());
+//		        	PopupPanel pp = new PopupPanel();
+//		     		pp.add(mfc);
+//		     		pp.center();
+//		     		pp.setGlassEnabled(true);
+//		     		pp.show();
 		       }
 	     };
 	     

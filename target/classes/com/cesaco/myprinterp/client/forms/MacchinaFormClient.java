@@ -8,6 +8,8 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 
+import net.sourceforge.htmlunit.corejs.javascript.ast.DoLoop;
+
 import org.jboss.errai.bus.client.api.ErrorCallback;
 import org.jboss.errai.bus.client.api.Message;
 import org.jboss.errai.bus.client.api.RemoteCallback;
@@ -18,6 +20,8 @@ import com.cesaco.myprinterp.client.shared.GruppoService;
 import com.cesaco.myprinterp.client.shared.Macchina;
 import com.cesaco.myprinterp.client.shared.MacchinaService;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.logical.shared.ResizeEvent;
+import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -33,9 +37,12 @@ import com.sencha.gxt.data.shared.ListStore;
 import com.sencha.gxt.data.shared.ModelKeyProvider;
 import com.sencha.gxt.data.shared.PropertyAccess;
 import com.sencha.gxt.widget.core.client.FramedPanel;
+import com.sencha.gxt.widget.core.client.Window;
 import com.sencha.gxt.widget.core.client.button.TextButton;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData;
+import com.sencha.gxt.widget.core.client.event.HideEvent;
+import com.sencha.gxt.widget.core.client.event.HideEvent.HideHandler;
 import com.sencha.gxt.widget.core.client.event.SelectEvent;
 import com.sencha.gxt.widget.core.client.form.ComboBox;
 import com.sencha.gxt.widget.core.client.form.FieldLabel;
@@ -51,32 +58,47 @@ public class MacchinaFormClient extends Composite {
 	private Caller<GruppoService> gruppoService;
 
 	private final List<Macchina> macchine = new ArrayList<Macchina>();
-	
+
 	private final Actions ac = new Actions();
 
+	private final Window window = new Window();
+
+	private FramedPanel form;
+	private FieldSet fieldSet;
+	private VerticalLayoutContainer p;
+
 	public Widget asWidget() {
-		if (vp == null) {
-			vp = new VerticalPanel();
-			vp.setSpacing(10);
-			createForm();
-		}
-		return vp;
+		window.show();
+		return window;
 	}
 
-	public MacchinaFormClient(Caller<MacchinaService> macchinaService, Caller<GruppoService> gruppoService) {
+	public MacchinaFormClient(Caller<MacchinaService> macchinaService,
+			Caller<GruppoService> gruppoService) {
+		form = new FramedPanel();
+		window.setPixelSize(500, 300);
+		window.setModal(true);
+		window.setBlinkModal(true);
+		window.setHeadingText("AT_MACCHINA");
+		window.setResizable(false);
+
+		window.addHideHandler(new HideHandler() {
+			@Override
+			public void onHide(HideEvent event) {
+
+			}
+		});
+
 		this.macchinaService = macchinaService;
 		this.gruppoService = gruppoService;
-		if (vp == null) {
-			vp = new VerticalPanel();
-			vp.setSpacing(10);
-			createForm();
-		}
-		initWidget(vp);
-		PopupPanel pp = new PopupPanel();
-		pp.add(this);
-		pp.center();
-		pp.setGlassEnabled(true);
-		pp.show();
+		vp = new VerticalPanel();
+		vp.setSpacing(10);
+		createForm();
+		// initWidget(vp);
+		// PopupPanel pp = new PopupPanel();
+		// pp.add(this);
+		// pp.center();
+		// pp.setGlassEnabled(true);
+		// pp.show();
 	}
 
 	private TextField cod_macchina;
@@ -95,23 +117,29 @@ public class MacchinaFormClient extends Composite {
 
 		LabelProvider<Gruppo> name();
 	}
-	
+
 	private ListStore<Gruppo> gruppi;
 
 	private void createForm() {
-		//ac = new Actions();
-		tempGruppoList = new ArrayList<Gruppo>();
-		
-		FramedPanel form = new FramedPanel();
-		form.setHeadingText("Gestione Macchina");
-		form.setWidth(350);
+		// ac = new Actions();
 
-		FieldSet fieldSet = new FieldSet();
+		tempGruppoList = new ArrayList<Gruppo>();
+
+		form.setHeaderVisible(false);
+		form.setBorders(false);
+
+
+		// form.setHeadingText("Gestione Macchina");
+		// form.setWidth(window.);
+
+		fieldSet = new FieldSet();
 		fieldSet.setHeadingText("Informazioni Macchina");
 		fieldSet.setCollapsible(true);
-		form.add(fieldSet);
 
-		VerticalLayoutContainer p = new VerticalLayoutContainer();
+		form.add(fieldSet);
+		
+		p = new VerticalLayoutContainer();
+		
 		fieldSet.add(p);
 
 		cod_macchina = new TextField();
@@ -160,14 +188,13 @@ public class MacchinaFormClient extends Composite {
 		gruppi = new ListStore<Gruppo>(propsGruppo.abbr());
 
 		// !!! devo popolare la lista di gruppi!!!!!!
-		//###################
-		getAllGruppo();
-		
-		//gruppi.addAll(ac.getGruppoList());
-		//################
+		// ###################
+		// getAllGruppo();
 
-		comboGruppi = new ComboBox<Gruppo>(gruppi,
-				propsGruppo.name());
+		// gruppi.addAll(ac.getGruppoList());
+		// ################
+
+		comboGruppi = new ComboBox<Gruppo>(gruppi, propsGruppo.name());
 		addHandlersForEventObservation(comboGruppi, propsGruppo.name());
 
 		comboGruppi.setEmptyText("Seleziona un gruppo...");
@@ -194,35 +221,35 @@ public class MacchinaFormClient extends Composite {
 		form.addButton(new TextButton("Annulla"));
 
 		vp.add(form);
+		window.add(vp);
+
 	}
-	
-	//Actions ac;
+
+	// Actions ac;
 
 	List<Gruppo> tempGruppoList;
-	
-	
-	
+
 	private void getAllGruppo() {
-		
+
 		gruppoService.call(new RemoteCallback<List<Gruppo>>() {
-		      @Override
-		      public void callback(List<Gruppo> response) {
-		        GWT.log("Got gruppo list. Size: " + response.size());
-		        gruppi.addAll(response);
-		        //ac.setTempGruppoList(response);
-		        Info.display("INFO", "hashcode  = " + ac.hashCode() );
-		        Info.display("INFO", "in getAllGruppo(). response.size = "+response.size());
-		      }
-		    },
-		    new ErrorCallback() {
-		      @Override
-		      public boolean error(Message message, Throwable throwable) {
-		        throwable.printStackTrace();
-		        return false;
-		      }
-		    }).retrieveAllGruppoOrderedByName();
+			@Override
+			public void callback(List<Gruppo> response) {
+				GWT.log("Got gruppo list. Size: " + response.size());
+				gruppi.addAll(response);
+				// ac.setTempGruppoList(response);
+				Info.display("INFO", "hashcode  = " + ac.hashCode());
+				Info.display("INFO", "in getAllGruppo(). response.size = "
+						+ response.size());
+			}
+		}, new ErrorCallback() {
+			@Override
+			public boolean error(Message message, Throwable throwable) {
+				throwable.printStackTrace();
+				return false;
+			}
+		}).retrieveAllGruppoOrderedByName();
 		Info.display("INFO", "CHiamato gruppoService.retrieve");
-		
+
 	}
 
 	private <T> void addHandlersForEventObservation(ComboBox<T> combo,
@@ -252,23 +279,26 @@ public class MacchinaFormClient extends Composite {
 	}
 
 	private class Actions {
-		
+
 		private final List<Gruppo> gruppoList = new ArrayList<Gruppo>();
-		
+
 		public void setTempGruppoList(List<Gruppo> gruppoList) {
-			Info.display("INFO", "gruppoList size from actions: "+gruppoList.size());
+			Info.display("INFO",
+					"gruppoList size from actions: " + gruppoList.size());
 			this.gruppoList.clear();
-			Info.display("INFO", "hashcode  = " + this.hashCode() );
+			Info.display("INFO", "hashcode  = " + this.hashCode());
 			for (int i = 0; i < gruppoList.size(); i++) {
 				this.gruppoList.add(gruppoList.get(i));
 			}
 		}
 
 		public List<Gruppo> getGruppoList() {
-			Info.display("INFO - ACTIONS", gruppoList != null ? ""+gruppoList.size() : "gruppoList is null");
+			Info.display("INFO - ACTIONS",
+					gruppoList != null ? "" + gruppoList.size()
+							: "gruppoList is null");
 			return gruppoList;
 		}
-		
+
 		private void closeForm() {
 			removeFromParent();
 		}

@@ -49,6 +49,8 @@ public class KitchenSinkApp {
 
   private KitchenSinkClient kitchenSinkUi;
   private BaseMenuClient baseMenuUi;
+  private BaseMenuClient2 baseMenuUi2;
+  private BaseLayoutEntry baseLayoutEntry;
 
   /**
    * Builds the UI and populates the member list by making an RPC call to the server.
@@ -65,10 +67,12 @@ public class KitchenSinkApp {
   public void createUI() {
     kitchenSinkUi = new KitchenSinkClient(memberService);
     baseMenuUi = new BaseMenuClient(gruppoService, macchinaService);
+    baseMenuUi2 = new BaseMenuClient2();
+    baseLayoutEntry = new BaseLayoutEntry();
     kitchenSinkUi.setTableStatusMessage("Fetching member list...");
 
     //RootPanel.get("kitchensink").add(kitchenSinkUi);
-    RootPanel.get("kitchensink").add(baseMenuUi);
+    RootPanel.get("kitchensink").add(baseLayoutEntry);
     fetchMemberList();
   }
 
