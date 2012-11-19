@@ -69,6 +69,7 @@ public class KitchenSinkApp {
     baseMenuUi = new BaseMenuClient(gruppoService, macchinaService);
     baseMenuUi2 = new BaseMenuClient2();
     baseLayoutEntry = new BaseLayoutEntry();
+    
     kitchenSinkUi.setTableStatusMessage("Fetching member list...");
 
     //RootPanel.get("kitchensink").add(kitchenSinkUi);
