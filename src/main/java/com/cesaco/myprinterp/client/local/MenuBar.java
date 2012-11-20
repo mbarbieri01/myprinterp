@@ -10,11 +10,12 @@ package com.cesaco.myprinterp.client.local;
  */
 
  
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.NodeList;
 import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.sencha.gxt.core.client.dom.XElement;
@@ -28,34 +29,55 @@ import com.sencha.gxt.widget.core.client.container.HBoxLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.HBoxLayoutContainer.HBoxLayoutAlign;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData;
+import com.sencha.gxt.widget.core.client.event.SelectEvent;
+import com.sencha.gxt.widget.core.client.event.SelectEvent.SelectHandler;
 import com.sencha.gxt.widget.core.client.menu.Menu;
 import com.sencha.gxt.widget.core.client.menu.MenuItem;
 import com.sencha.gxt.widget.core.client.toolbar.ToolBar;
  
 public class MenuBar implements IsWidget {
+	
+	private KitchenSinkApp controller;
+	
+	 public KitchenSinkApp getController() {
+			return controller;
+		}
+
+		public void setController(KitchenSinkApp controller) {
+			this.controller = controller;
+		}
  
   class SamplePanel extends ContentPanel {
  
 	private HBoxLayoutContainer cont;
 	
-    private VerticalLayoutContainer con = new VerticalLayoutContainer();
+	
+	
+   
+
+	private VerticalLayoutContainer con = new VerticalLayoutContainer();
      
     private ToolBar toolBar = new ToolBar();
+    
+    private final Resources res = GWT.create(Resources.class);
  
     public SamplePanel() {
       //setPixelSize();
       //toolBar.setSpacing(2);
  
     	
-    	
-    	//####CONTROLLARE!!!!! non funziona
+
     	cont = new HBoxLayoutContainer();
     	cont.setHBoxLayoutAlign(HBoxLayoutAlign.TOP);
- 
+    	BoxLayoutData flex = new BoxLayoutData(new Margins(0, 0, 0, 0));
+        flex.setFlex(1);
       con.add(toolBar,  new VerticalLayoutData(1, -1));
 
-      cont.add(con, new BoxLayoutData(new Margins(0, 5, 0, 0)));
-      cont.add(new Label("CESACO"), new BoxLayoutData(new Margins(0, 5, 0, 0)));
+      cont.add(con, flex);
+      Image logo = new Image(res.logo());
+      logo.setPixelSize(249, 97);
+      
+      cont.add(logo, new BoxLayoutData(new Margins(0, 0, 0, 0)));
       add(cont);
     }
  
@@ -85,7 +107,14 @@ public class MenuBar implements IsWidget {
     FlexTable table = new FlexTable();
     group.add(table);
  
-    TextButton btn = new TextButton("Cool");
+    TextButton btn = new TextButton("Form1");
+    btn.addSelectHandler(new SelectHandler() {
+    	 
+        @Override
+        public void onSelect(SelectEvent event) {
+          controller.addForm1();
+        }
+      });
     table.setWidget(0, 0, btn);
  
     btn = new TextButton("Cut");

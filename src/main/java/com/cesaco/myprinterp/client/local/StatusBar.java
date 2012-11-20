@@ -8,7 +8,6 @@ package com.cesaco.myprinterp.client.local;
  * http://www.sencha.com/products/gxt/license/
  */
  
-import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.event.dom.client.KeyPressHandler;
@@ -25,7 +24,6 @@ import com.sencha.gxt.widget.core.client.Status.BoxStatusAppearance;
 import com.sencha.gxt.widget.core.client.Status.StatusAppearance;
 import com.sencha.gxt.widget.core.client.container.CenterLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.SimpleContainer;
-import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData;
 import com.sencha.gxt.widget.core.client.form.TextArea;
 import com.sencha.gxt.widget.core.client.toolbar.FillToolItem;
@@ -33,8 +31,18 @@ import com.sencha.gxt.widget.core.client.toolbar.LabelToolItem;
 import com.sencha.gxt.widget.core.client.toolbar.ToolBar;
  
 public class StatusBar implements IsWidget {
+	
+	private KitchenSinkApp controller;
  
-  private DelayedTask task = new DelayedTask() {
+  public KitchenSinkApp getController() {
+		return controller;
+	}
+
+	public void setController(KitchenSinkApp controller) {
+		this.controller = controller;
+	}
+
+private DelayedTask task = new DelayedTask() {
     @Override
     public void onExecute() {
       status.clearStatus("Not writing");

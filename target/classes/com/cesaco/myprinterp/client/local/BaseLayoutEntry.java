@@ -21,6 +21,34 @@ import com.sencha.gxt.widget.core.client.container.Viewport;
 
 public class BaseLayoutEntry implements IsWidget {
 	
+	private StatusBar statusBar;
+	private MenuBar menuBar;
+	private AdvTabPanel advTabPanel;
+	
+	public StatusBar getStatusBar() {
+		return statusBar;
+	}
+
+	public void setStatusBar(StatusBar statusBar) {
+		this.statusBar = statusBar;
+	}
+
+	public MenuBar getMenuBar() {
+		return menuBar;
+	}
+
+	public void setMenuBar(MenuBar menuBar) {
+		this.menuBar = menuBar;
+	}
+
+	public AdvTabPanel getAdvTabPanel() {
+		return advTabPanel;
+	}
+
+	public void setAdvTabPanel(AdvTabPanel advTabPanel) {
+		this.advTabPanel = advTabPanel;
+	}
+
 	public Widget asWidget() {
 
 		final BorderLayoutContainer con = new BorderLayoutContainer();
@@ -46,12 +74,12 @@ public class BaseLayoutEntry implements IsWidget {
 
 		
 
-		north.add(new MenuBar());
+		north.add(menuBar);
 		
 		center.setResize(false);
-		center.add(new AdvTabPanel());
+		center.add(advTabPanel);
 		
-		south.add(new StatusBar());
+		south.add(statusBar);
 
 		
 

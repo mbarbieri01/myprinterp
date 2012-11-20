@@ -21,12 +21,19 @@ public class AdvTabPanel implements IsWidget {
  
   private TabPanel advanced;
   private int index = 0;
+  
+  private KitchenSinkApp controller;
  
-  public Widget asWidget() {
+  public KitchenSinkApp getController() {
+	return controller;
+}
 
- 
-      
- 
+public void setController(KitchenSinkApp controller) {
+	this.controller = controller;
+}
+
+public Widget asWidget() {
+
       advanced = new TabPanel();
       //advanced.setBorders(false);
       
@@ -37,9 +44,6 @@ public class AdvTabPanel implements IsWidget {
       advanced.setCloseContextMenu(true);
  
  
-      while (index < 27) {
-        addTab();
-      }
  
       advanced.setActiveWidget(advanced.getWidget(6));
 
@@ -51,10 +55,10 @@ public class AdvTabPanel implements IsWidget {
     RootPanel.get().add(asWidget());
   }
  
-  public void addTab() {
-    Label item = new Label("Tab Body " + (index + 1));
-    item.addStyleName("pad-text");
-    advanced.add(item, new TabItemConfig("New Tab " + ++index, index != 1));
+  public void addTab(IsWidget form, String label) {
+//    Label item = new Label("Tab Body " + (index + 1));
+//    item.addStyleName("pad-text");
+    //advanced.add(form, new TabItemConfig(label, true));
   }
  
 }

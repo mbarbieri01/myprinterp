@@ -12,6 +12,7 @@ import org.jboss.errai.ioc.client.api.AfterInitialization;
 import org.jboss.errai.ioc.client.api.Caller;
 import org.jboss.errai.ioc.client.api.EntryPoint;
 
+import com.cesaco.myprinterp.client.forms.GruppoFormClient;
 import com.cesaco.myprinterp.client.shared.GruppoService;
 import com.cesaco.myprinterp.client.shared.MacchinaService;
 import com.cesaco.myprinterp.client.shared.Member;
@@ -48,27 +49,34 @@ public class KitchenSinkApp {
   private Caller<MacchinaService> macchinaService;
 
   private KitchenSinkClient kitchenSinkUi;
-  private BaseMenuClient baseMenuUi;
-  private BaseMenuClient2 baseMenuUi2;
-  private BaseLayoutEntry baseLayoutEntry;
 
-  /**
-   * Builds the UI and populates the member list by making an RPC call to the server.
-   * <p>
-   * Note that because this method performs an RPC call to the server, it is annotated
-   * with AfterInitialization rather than PostConstruct: the contract of PostConstruct
-   * only guarantees that all of <em>this</em> bean's dependencies have been injected,
-   * but it does not guarantee that the entire runtime environment has completed its
-   * bootstrapping routine. Methods annotated with the Errai-specific AfterInitialization
-   * are only called once everything is up and running, including the communication
-   * channel to the server.
-   */
+  private BaseLayoutEntry baseLayoutEntry;
+  
+  private StatusBar statusBar;
+  private MenuBar menuBar;
+  private AdvTabPanel advTabPanel;
+
   @AfterInitialization
   public void createUI() {
+	  
+	  //////
+	  /*
+	   * GUARDARE LOG!!!!!
+	   */
     kitchenSinkUi = new KitchenSinkClient(memberService);
-    baseMenuUi = new BaseMenuClient(gruppoService, macchinaService);
-    baseMenuUi2 = new BaseMenuClient2();
+
     baseLayoutEntry = new BaseLayoutEntry();
+    
+    statusBar = new StatusBar();
+    statusBar.setController(this);
+    menuBar = new MenuBar();
+    menuBar.setController(this);
+    advTabPanel = new AdvTabPanel();
+    advTabPanel.setController(this);
+    
+    baseLayoutEntry.setAdvTabPanel(advTabPanel);
+    baseLayoutEntry.setMenuBar(menuBar);
+    baseLayoutEntry.setStatusBar(statusBar);
     
     kitchenSinkUi.setTableStatusMessage("Fetching member list...");
 
@@ -110,6 +118,10 @@ public class KitchenSinkApp {
         return false;
       }
     }).retrieveAllMembersOrderedByName();
+  }
+  
+  public void addForm1() {
+	  //advTabPanel.addTab(new GruppoFormClient(gruppoService), "Form1");
   }
 
 }
