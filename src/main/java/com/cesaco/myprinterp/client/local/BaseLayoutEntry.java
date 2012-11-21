@@ -24,7 +24,16 @@ public class BaseLayoutEntry implements IsWidget {
 	private StatusBar statusBar;
 	private MenuBar menuBar;
 	private AdvTabPanel advTabPanel;
+	private AccordionLayout accordionPanel;
 	
+	public AccordionLayout getAccordionPanel() {
+		return accordionPanel;
+	}
+
+	public void setAccordionPanel(AccordionLayout accordionPanel) {
+		this.accordionPanel = accordionPanel;
+	}
+
 	public StatusBar getStatusBar() {
 		return statusBar;
 	}
@@ -72,7 +81,7 @@ public class BaseLayoutEntry implements IsWidget {
 		
 		
 
-		
+		west.add(accordionPanel);
 
 		north.add(menuBar);
 		
@@ -91,12 +100,12 @@ public class BaseLayoutEntry implements IsWidget {
 		BorderLayoutData westData = new BorderLayoutData(150);
 		westData.setCollapsible(true);
 		westData.setSplit(true);
-		westData.setMargins(new Margins(0, 5, 0, 5));
+		westData.setMargins(new Margins(5));
 
 		MarginData centerData = new MarginData();
 
 		BorderLayoutData eastData = new BorderLayoutData(150);
-		eastData.setMargins(new Margins(0, 5, 0, 5));
+		eastData.setMargins(new Margins(5));
 		eastData.setCollapsible(true);
 		eastData.setSplit(true);
 
@@ -115,8 +124,9 @@ public class BaseLayoutEntry implements IsWidget {
 		simple.add(con, new MarginData(0));
 
 		Viewport viewport = new Viewport();
-		
+		viewport.setPosition(0, 0);
 		viewport.add(simple);
+		
 		
 		return viewport;
 	}
@@ -130,3 +140,4 @@ public class BaseLayoutEntry implements IsWidget {
 	}
 
 }
+

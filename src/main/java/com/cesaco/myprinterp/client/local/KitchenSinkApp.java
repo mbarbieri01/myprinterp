@@ -12,6 +12,7 @@ import org.jboss.errai.ioc.client.api.AfterInitialization;
 import org.jboss.errai.ioc.client.api.Caller;
 import org.jboss.errai.ioc.client.api.EntryPoint;
 
+import com.cesaco.myprinterp.client.charts.LineExample;
 import com.cesaco.myprinterp.client.forms.GruppoFormClient;
 import com.cesaco.myprinterp.client.shared.GruppoService;
 import com.cesaco.myprinterp.client.shared.MacchinaService;
@@ -19,6 +20,7 @@ import com.cesaco.myprinterp.client.shared.Member;
 import com.cesaco.myprinterp.client.shared.MemberService;
 import com.cesaco.myprinterp.client.shared.New;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.RootPanel;
 
 /**
@@ -55,6 +57,7 @@ public class KitchenSinkApp {
   private StatusBar statusBar;
   private MenuBar menuBar;
   private AdvTabPanel advTabPanel;
+  private AccordionLayout accordionPanel;
 
   @AfterInitialization
   public void createUI() {
@@ -73,10 +76,13 @@ public class KitchenSinkApp {
     menuBar.setController(this);
     advTabPanel = new AdvTabPanel();
     advTabPanel.setController(this);
+    accordionPanel = new AccordionLayout();
+	accordionPanel.setController(this);
     
     baseLayoutEntry.setAdvTabPanel(advTabPanel);
     baseLayoutEntry.setMenuBar(menuBar);
     baseLayoutEntry.setStatusBar(statusBar);
+    baseLayoutEntry.setAccordionPanel(accordionPanel);
     
     kitchenSinkUi.setTableStatusMessage("Fetching member list...");
 
@@ -121,7 +127,12 @@ public class KitchenSinkApp {
   }
   
   public void addForm1() {
-	  //advTabPanel.addTab(new GruppoFormClient(gruppoService), "Form1");
+	  advTabPanel.addTab((IsWidget) new GruppoFormClient(gruppoService), "AT_GRUPPO");
   }
+
+public void addChart1() {
+	advTabPanel.addTab((IsWidget) new LineExample(/*gruppoService*/), "Chart esempio");
+	
+}
 
 }

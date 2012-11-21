@@ -13,6 +13,8 @@ package com.cesaco.myprinterp.client.local;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.NodeList;
+import com.google.gwt.event.logical.shared.ResizeEvent;
+import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.IsWidget;
@@ -39,6 +41,8 @@ public class MenuBar implements IsWidget {
 	
 	private KitchenSinkApp controller;
 	
+	private SamplePanel panel;
+	
 	 public KitchenSinkApp getController() {
 			return controller;
 		}
@@ -60,7 +64,12 @@ public class MenuBar implements IsWidget {
     private ToolBar toolBar = new ToolBar();
     
     private final Resources res = GWT.create(Resources.class);
- 
+    
+    public void resize() {
+    	this.forceLayout();
+    	cont.forceLayout();
+    	}
+    
     public SamplePanel() {
       //setPixelSize();
       //toolBar.setSpacing(2);
@@ -91,13 +100,20 @@ public class MenuBar implements IsWidget {
     
     con.add(createMulti());
 
+    con.addResizeHandler(new ResizeHandler() {
+
+    	 @Override
+    	 public void onResize(ResizeEvent event) {
+    	 panel.resize();
+    	 }
+    	});
  
     return con;
   };
  
  
   private ContentPanel createMulti() {
-    SamplePanel panel = new SamplePanel();
+    panel = new SamplePanel();
     panel.setHeaderVisible(false);
  
     ButtonGroup group = new ButtonGroup();
@@ -107,7 +123,7 @@ public class MenuBar implements IsWidget {
     FlexTable table = new FlexTable();
     group.add(table);
  
-    TextButton btn = new TextButton("Form1");
+    TextButton btn = new TextButton("AT_GRUPPO!");
     btn.addSelectHandler(new SelectHandler() {
     	 
         @Override
@@ -136,7 +152,14 @@ public class MenuBar implements IsWidget {
     table = new FlexTable();
     group.add(table);
  
-    btn = new TextButton("Cool");
+    btn = new TextButton("GRAFICO!");
+    btn.addSelectHandler(new SelectHandler() {
+     	 
+        @Override
+        public void onSelect(SelectEvent event) {
+          controller.addChart1();
+        }
+      });
     table.setWidget(0, 0, btn);
  
     btn = new TextButton("Cut");

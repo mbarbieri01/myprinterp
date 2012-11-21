@@ -48,6 +48,7 @@ public class GruppoFormClient extends Composite {
 	    if (vp == null) {
 	      vp = new VerticalPanel();
 	      vp.setSpacing(10);
+	      vp.setWidth("100%");
 	      createForm();
 	    }
 	    return vp;
@@ -60,12 +61,12 @@ public class GruppoFormClient extends Composite {
 		      vp.setSpacing(10);
 		      createForm();
 		    }
-		  initWidget(vp);
-		  PopupPanel pp = new PopupPanel();
-			pp.add(this);
-			pp.center();
-			pp.setGlassEnabled(true);
-			pp.show();
+//		  initWidget(vp);
+//		  PopupPanel pp = new PopupPanel();
+//			pp.add(this);
+//			pp.center();
+//			pp.setGlassEnabled(true);
+//			pp.show();
 	  }
 
 	  private TextField cod_gruppo;
@@ -78,8 +79,8 @@ public class GruppoFormClient extends Composite {
 	 
 	  private void createForm() {
 	    FramedPanel form = new FramedPanel();
-	    form.setHeadingText("Gestione Gruppo");
-	    form.setWidth(350);
+	    form.setHeaderVisible(false);
+	    //form.setWidth(350);
 	 
 	    FieldSet fieldSet = new FieldSet();
 	    fieldSet.setHeadingText("Informazioni Gruppo");
