@@ -27,6 +27,7 @@ private KitchenSinkApp controller;
   public Widget asWidget() {
     if (panel == null) {
       panel = new ContentPanel();
+      panel.setBorders(false);
       panel.setHeadingText("Menu Secondario");
       panel.setBodyBorder(false);
       panel.setPixelSize(200, 325);

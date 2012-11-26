@@ -89,7 +89,7 @@ public class KitchenSinkClient extends Composite {
 
   @UiField Label tableEmptyMessage;
 
-  @UiField(provided=true) CellTable<Member> membersTable = new CellTable<Member>();
+  CellTable<Member> membersTable = new CellTable<Member>();
 
   public KitchenSinkClient(Caller<MemberService> memberService) {
     this.memberService = memberService;

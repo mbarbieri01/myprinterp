@@ -8,8 +8,6 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 
-import net.sourceforge.htmlunit.corejs.javascript.ast.DoLoop;
-
 import org.jboss.errai.bus.client.api.ErrorCallback;
 import org.jboss.errai.bus.client.api.Message;
 import org.jboss.errai.bus.client.api.RemoteCallback;
@@ -19,30 +17,24 @@ import com.cesaco.myprinterp.client.shared.Gruppo;
 import com.cesaco.myprinterp.client.shared.GruppoService;
 import com.cesaco.myprinterp.client.shared.Macchina;
 import com.cesaco.myprinterp.client.shared.MacchinaService;
+import com.cesaco.myprinterp.client.local.data.model.GruppoProperties;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.logical.shared.ResizeEvent;
-import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.sencha.gxt.cell.core.client.form.ComboBoxCell.TriggerAction;
 import com.sencha.gxt.data.shared.LabelProvider;
 import com.sencha.gxt.data.shared.ListStore;
-import com.sencha.gxt.data.shared.ModelKeyProvider;
-import com.sencha.gxt.data.shared.PropertyAccess;
 import com.sencha.gxt.widget.core.client.FramedPanel;
 import com.sencha.gxt.widget.core.client.Window;
 import com.sencha.gxt.widget.core.client.button.TextButton;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData;
-import com.sencha.gxt.widget.core.client.event.HideEvent;
-import com.sencha.gxt.widget.core.client.event.HideEvent.HideHandler;
 import com.sencha.gxt.widget.core.client.event.SelectEvent;
 import com.sencha.gxt.widget.core.client.form.ComboBox;
 import com.sencha.gxt.widget.core.client.form.FieldLabel;
@@ -68,31 +60,39 @@ public class MacchinaFormClient extends Composite {
 	private VerticalLayoutContainer p;
 
 	public Widget asWidget() {
-		window.show();
-		return window;
+		if (vp == null) {
+		      vp = new VerticalPanel();
+		      vp.setSpacing(10);
+		      vp.setWidth("100%");
+		      createForm();
+		    }
+		    return vp;
 	}
 
 	public MacchinaFormClient(Caller<MacchinaService> macchinaService,
 			Caller<GruppoService> gruppoService) {
-		form = new FramedPanel();
-		window.setPixelSize(500, 300);
-		window.setModal(true);
-		window.setBlinkModal(true);
-		window.setHeadingText("AT_MACCHINA");
-		window.setResizable(false);
-
-		window.addHideHandler(new HideHandler() {
-			@Override
-			public void onHide(HideEvent event) {
-
-			}
-		});
+		// form = new FramedPanel();
+		// window.setPixelSize(500, 300);
+		// window.setModal(true);
+		// window.setBlinkModal(true);
+		// window.setHeadingText("AT_MACCHINA");
+		// window.setResizable(false);
+		//
+		// window.addHideHandler(new HideHandler() {
+		// @Override
+		// public void onHide(HideEvent event) {
+		//
+		// }
+		// });
 
 		this.macchinaService = macchinaService;
 		this.gruppoService = gruppoService;
-		vp = new VerticalPanel();
-		vp.setSpacing(10);
-		createForm();
+		if (vp == null) {
+			vp = new VerticalPanel();
+			vp.setSpacing(10);
+			createForm();
+		}
+
 		// initWidget(vp);
 		// PopupPanel pp = new PopupPanel();
 		// pp.add(this);
@@ -112,22 +112,18 @@ public class MacchinaFormClient extends Composite {
 	private Label cod_gruppoError;
 	private Label registerConfirmMessage;
 
-	interface GruppoProperties extends PropertyAccess<Gruppo> {
-		ModelKeyProvider<Gruppo> abbr();
-
-		LabelProvider<Gruppo> name();
-	}
+	
 
 	private ListStore<Gruppo> gruppi;
 
 	private void createForm() {
 		// ac = new Actions();
+		FramedPanel form = new FramedPanel();
 
 		tempGruppoList = new ArrayList<Gruppo>();
 
 		form.setHeaderVisible(false);
 		form.setBorders(false);
-
 
 		// form.setHeadingText("Gestione Macchina");
 		// form.setWidth(window.);
@@ -137,9 +133,9 @@ public class MacchinaFormClient extends Composite {
 		fieldSet.setCollapsible(true);
 
 		form.add(fieldSet);
-		
+
 		p = new VerticalLayoutContainer();
-		
+
 		fieldSet.add(p);
 
 		cod_macchina = new TextField();
@@ -189,9 +185,9 @@ public class MacchinaFormClient extends Composite {
 
 		// !!! devo popolare la lista di gruppi!!!!!!
 		// ###################
-		// getAllGruppo();
+		getAllGruppo();
 
-		// gruppi.addAll(ac.getGruppoList());
+		//gruppi.addAll(ac.getGruppoList());
 		// ################
 
 		comboGruppi = new ComboBox<Gruppo>(gruppi, propsGruppo.name());
@@ -221,7 +217,6 @@ public class MacchinaFormClient extends Composite {
 		form.addButton(new TextButton("Annulla"));
 
 		vp.add(form);
-		window.add(vp);
 
 	}
 

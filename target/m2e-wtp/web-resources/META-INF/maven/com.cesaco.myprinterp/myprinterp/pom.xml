@@ -137,6 +137,16 @@
         <type>jar</type>
         <scope>test</scope>
       </dependency>
+      <dependency>
+      	<groupId>com.sencha.gxt</groupId>
+      	<artifactId>gxt</artifactId>
+      	<version>3.0.1</version>
+      </dependency>
+      <dependency>
+      	<groupId>com.sencha.gxt</groupId>
+      	<artifactId>gxt-chart</artifactId>
+      	<version>3.0.1</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -339,6 +349,14 @@
       <scope>test</scope>
     </dependency>
 
+    <dependency>
+    	<groupId>com.sencha.gxt</groupId>
+    	<artifactId>gxt</artifactId>
+    </dependency>
+    <dependency>
+    	<groupId>com.sencha.gxt</groupId>
+    	<artifactId>gxt-chart</artifactId>
+    </dependency>
   </dependencies>
 
   <build>
@@ -385,7 +403,7 @@
         <configuration>
           <inplace>true</inplace>
           <logLevel>INFO</logLevel>
-          <extraJvmArgs>-Xmx512m</extraJvmArgs>
+          <extraJvmArgs>-Xmx1024m</extraJvmArgs>
 
           <!-- Configure GWT's development mode (formerly known as hosted 
             mode) to not start the default server (embedded jetty), but to download the 

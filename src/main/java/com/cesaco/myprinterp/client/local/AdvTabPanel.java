@@ -58,7 +58,7 @@ public class AdvTabPanel implements IsWidget {
 	  public void addTab(IsWidget form, String label) {
 //	    Label item = new Label("Tab Body " + (index + 1));
 //	    item.addStyleName("pad-text");
-	    advanced.add(form, new TabItemConfig(""+label+i, true));
+	    advanced.add(form, new TabItemConfig(label, true));
 	    advanced.setActiveWidget(advanced.getWidget(advanced.getWidgetCount()-1));
 	    i++;
 	  }

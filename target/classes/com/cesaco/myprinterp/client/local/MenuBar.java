@@ -139,7 +139,14 @@ public class MenuBar implements IsWidget {
     btn.setMenu(menu);
     table.setWidget(0, 1, btn);
  
-    btn = new TextButton("Copy");
+    btn = new TextButton("AT_MACCHINA!");
+    btn.addSelectHandler(new SelectHandler() {
+   	 
+        @Override
+        public void onSelect(SelectEvent event) {
+          controller.addForm2();
+        }
+      });
     table.setWidget(1, 0, btn);
     // //
     btn = new TextButton("Paste");

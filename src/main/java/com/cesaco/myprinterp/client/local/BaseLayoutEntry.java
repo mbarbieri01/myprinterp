@@ -23,7 +23,16 @@ public class BaseLayoutEntry implements IsWidget {
 	
 	private StatusBar statusBar;
 	private MenuBar menuBar;
-	private AdvTabPanel advTabPanel;
+	private CentralPanel centralPanel;
+	
+	public CentralPanel getCentralPanel() {
+		return centralPanel;
+	}
+
+	public void setCentralPanel(CentralPanel centralPanel) {
+		this.centralPanel = centralPanel;
+	}
+
 	private AccordionLayout accordionPanel;
 	
 	public AccordionLayout getAccordionPanel() {
@@ -48,14 +57,6 @@ public class BaseLayoutEntry implements IsWidget {
 
 	public void setMenuBar(MenuBar menuBar) {
 		this.menuBar = menuBar;
-	}
-
-	public AdvTabPanel getAdvTabPanel() {
-		return advTabPanel;
-	}
-
-	public void setAdvTabPanel(AdvTabPanel advTabPanel) {
-		this.advTabPanel = advTabPanel;
 	}
 
 	public Widget asWidget() {
@@ -86,7 +87,7 @@ public class BaseLayoutEntry implements IsWidget {
 		north.add(menuBar);
 		
 		center.setResize(false);
-		center.add(advTabPanel);
+		center.add(centralPanel);
 		
 		south.add(statusBar);
 
