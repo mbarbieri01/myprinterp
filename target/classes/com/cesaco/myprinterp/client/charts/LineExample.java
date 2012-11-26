@@ -1,7 +1,7 @@
 package com.cesaco.myprinterp.client.charts;
 
-import com.cesaco.myprinterp.client.local.data.Data;
-import com.cesaco.myprinterp.client.local.data.TestData;
+import com.cesaco.myprinterp.client.data.Data;
+import com.cesaco.myprinterp.client.data.TestData;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;

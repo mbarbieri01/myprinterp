@@ -9,19 +9,7 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/mattia/git/myprinterp/myprinterp/src/main/webapp/WEB-INF/lib/gxt-3.0.1.jar" sourcepath="/Users/mattia/dev/gxt-3.0.1-GPL/src/gxt"/>
-	<classpathentry kind="lib" path="/Users/mattia/git/myprinterp/myprinterp/src/main/webapp/WEB-INF/lib/gxt-chart-3.0.1.jar" sourcepath="/Users/mattia/dev/gxt-3.0.1-GPL/src/gxt-chart"/>
-	<classpathentry kind="lib" path="/Applications/eclipse_indigo/plugins/com.google.gwt.eclipse.sdkbundle_2.4.0.v201201120043-rel-r37/gwt-2.4.0/gwt-user.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/Applications/eclipse_indigo/plugins/com.google.gwt.eclipse.sdkbundle_2.4.0.v201201120043-rel-r37/gwt-2.4.0/doc/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="/Applications/eclipse_indigo/plugins/com.google.gwt.eclipse.sdkbundle_2.4.0.v201201120043-rel-r37/gwt-2.4.0/gwt-dev.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/Applications/eclipse_indigo/plugins/com.google.gwt.eclipse.sdkbundle_2.4.0.v201201120043-rel-r37/gwt-2.4.0/doc/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="/Applications/eclipse_indigo/plugins/com.google.gwt.eclipse.sdkbundle_2.4.0.v201201120043-rel-r37/gwt-2.4.0/validation-api-1.0.0.GA-sources.jar"/>
-	<classpathentry kind="lib" path="/Applications/eclipse_indigo/plugins/com.google.gwt.eclipse.sdkbundle_2.4.0.v201201120043-rel-r37/gwt-2.4.0/validation-api-1.0.0.GA.jar" sourcepath="/Applications/eclipse_indigo/plugins/com.google.gwt.eclipse.sdkbundle_2.4.0.v201201120043-rel-r37/gwt-2.4.0/validation-api-1.0.0.GA-sources.jar"/>
+	<classpathentry kind="lib" path="/Users/mattia/git/myprinterp/myprinterp/src/main/webapp/WEB-INF/lib/gxt-chart-3.0.1.jar"/>
+	<classpathentry kind="lib" path="/Users/mattia/git/myprinterp/myprinterp/src/main/webapp/WEB-INF/lib/gxt-3.0.1.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

@@ -129,6 +129,7 @@ public class MenuBar implements IsWidget {
         @Override
         public void onSelect(SelectEvent event) {
           controller.addForm1();
+          controller.addGrid1();
         }
       });
     table.setWidget(0, 0, btn);

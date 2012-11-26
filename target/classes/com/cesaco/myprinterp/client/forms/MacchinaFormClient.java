@@ -17,7 +17,7 @@ import com.cesaco.myprinterp.client.shared.Gruppo;
 import com.cesaco.myprinterp.client.shared.GruppoService;
 import com.cesaco.myprinterp.client.shared.Macchina;
 import com.cesaco.myprinterp.client.shared.MacchinaService;
-import com.cesaco.myprinterp.client.local.data.model.GruppoProperties;
+import com.cesaco.myprinterp.client.data.model.GruppoProperties;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
