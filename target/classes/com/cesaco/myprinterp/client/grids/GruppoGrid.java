@@ -49,6 +49,8 @@ import com.sencha.gxt.widget.core.client.grid.ColumnConfig;
 import com.sencha.gxt.widget.core.client.grid.ColumnModel;
 import com.sencha.gxt.widget.core.client.grid.Grid;
 import com.sencha.gxt.widget.core.client.info.Info;
+import com.sencha.gxt.widget.core.client.selection.SelectionChangedEvent;
+import com.sencha.gxt.widget.core.client.selection.SelectionChangedEvent.SelectionChangedHandler;
 import com.sencha.gxt.widget.core.client.toolbar.PagingToolBar;
 
 public class GruppoGrid implements IsWidget {
@@ -115,6 +117,7 @@ public class GruppoGrid implements IsWidget {
 		l.add(des_gruppoColumn);
 
 		ColumnModel<Gruppo> cm = new ColumnModel<Gruppo>(l);
+		
 
 		Grid<Gruppo> grid = new Grid<Gruppo>(store, cm) {
 			@Override
@@ -133,7 +136,20 @@ public class GruppoGrid implements IsWidget {
 		grid.setLoadMask(true);
 		grid.setLoader(loader);
 		grid.setHeight("100%");
-
+		grid.getSelectionModel().addSelectionChangedHandler(new SelectionChangedHandler<Gruppo>() {
+	        @Override
+	        public void onSelectionChanged(SelectionChangedEvent<Gruppo> event) {
+	          if (event.getSelection().size() > 0) {
+	        	  GWT.log("Selezionato: "+event.getSelection().get(0).getCod_gruppo());
+	        	  //##############
+	        	  //DOMANI LAVORI DA QUI!!!!!! edit MODEL nella FORM!!!!
+	            //edit(event.getSelection().get(0));
+	          } else {
+	            //stockEditor.setSaveEnabled(false);
+	          }
+	        }
+	      });
+		
 		FramedPanel cp = new FramedPanel();
 		cp.setCollapsible(false);
 		cp.setHeaderVisible(false);
