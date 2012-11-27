@@ -62,8 +62,9 @@ public class MacchinaFormClient extends Composite {
 	public Widget asWidget() {
 		if (vp == null) {
 		      vp = new VerticalPanel();
-		      vp.setSpacing(10);
+		      vp.setSpacing(0);
 		      vp.setWidth("100%");
+		      vp.setHeight("200px");
 		      createForm();
 		    }
 		    return vp;
@@ -89,7 +90,9 @@ public class MacchinaFormClient extends Composite {
 		this.gruppoService = gruppoService;
 		if (vp == null) {
 			vp = new VerticalPanel();
-			vp.setSpacing(10);
+			vp.setSpacing(0);
+			vp.setWidth("100%");
+		      vp.setHeight("200px");
 			createForm();
 		}
 
@@ -119,7 +122,8 @@ public class MacchinaFormClient extends Composite {
 	private void createForm() {
 		// ac = new Actions();
 		FramedPanel form = new FramedPanel();
-
+		form.setWidth("100%");
+		 
 		tempGruppoList = new ArrayList<Gruppo>();
 
 		form.setHeaderVisible(false);
@@ -182,7 +186,7 @@ public class MacchinaFormClient extends Composite {
 		GruppoProperties propsGruppo = GWT.create(GruppoProperties.class);
 		// Combo box
 		gruppi = new ListStore<Gruppo>(propsGruppo.abbr());
-
+		GWT.log("MacchinaFormClient. gruppi.size = "+gruppi.size());
 		// !!! devo popolare la lista di gruppi!!!!!!
 		// ###################
 		getAllGruppo();

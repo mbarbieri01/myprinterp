@@ -27,7 +27,7 @@ public class CentralPanel implements IsWidget {
 
 	public void setSouth(IsWidget south) {
 		this.south = south;
-		nsc.setSouthWidget(south);
+	
 	}
 
 	public void onModuleLoad() {

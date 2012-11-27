@@ -60,7 +60,6 @@ public class KitchenSinkApp {
 	private MenuBar menuBar;
 	private AdvTabPanel advTabPanel;
 	private AccordionLayout accordionPanel;
-	private CentralPanel centralPanel;
 
 	@AfterInitialization
 	public void createUI() {
@@ -78,18 +77,16 @@ public class KitchenSinkApp {
 		menuBar = new MenuBar();
 		menuBar.setController(this);
 		
-		centralPanel = new CentralPanel();
 		
 		advTabPanel = new AdvTabPanel();
 		advTabPanel.setController(this);
-		
-		centralPanel.setNorth(advTabPanel);
+
 		
 		accordionPanel = new AccordionLayout();
 		accordionPanel.setController(this);
 
 		//baseLayoutEntry.setAdvTabPanel(advTabPanel);
-		baseLayoutEntry.setCentralPanel(centralPanel);
+		baseLayoutEntry.setAdvTabPanel(advTabPanel);
 		baseLayoutEntry.setMenuBar(menuBar);
 		baseLayoutEntry.setStatusBar(statusBar);
 		baseLayoutEntry.setAccordionPanel(accordionPanel);
@@ -141,8 +138,10 @@ public class KitchenSinkApp {
 	}
 
 	public void addForm1() {
-		advTabPanel.addTab((IsWidget) new GruppoFormClient(gruppoService),
-				"AT_GRUPPO");
+		CentralPanel centralPanel = new CentralPanel();
+		centralPanel.setNorth((IsWidget) new GruppoFormClient(gruppoService));
+		centralPanel.setSouth((IsWidget) new GruppoGrid(gruppoService));
+		advTabPanel.addTab(centralPanel, "AT_GRUPPO");
 	}
 
 	public void addChart1() {
@@ -152,11 +151,12 @@ public class KitchenSinkApp {
 	}
 	
 	public void addForm2() {
+		
 		advTabPanel.addTab((IsWidget) new MacchinaFormClient(macchinaService, gruppoService), "AT_MACCHINA");
 	}
 	
 	public void addGrid1() {
-		centralPanel.setSouth(new GruppoGrid(gruppoService));
+		
 	}
 
 }
