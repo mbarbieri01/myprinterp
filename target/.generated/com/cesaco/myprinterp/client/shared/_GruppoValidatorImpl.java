@@ -244,12 +244,12 @@ public class _GruppoValidatorImpl extends com.google.gwt.validation.client.impl.
   
   
   // Write the wrappers after we know which are needed
-  private native java.lang.String _cod_gruppo(Gruppo object) /*-{
-    return object.@com.cesaco.myprinterp.client.shared.Gruppo::cod_gruppo;
-  }-*/;
-  
   private native java.lang.String _des_gruppo(Gruppo object) /*-{
     return object.@com.cesaco.myprinterp.client.shared.Gruppo::des_gruppo;
+  }-*/;
+  
+  private native java.lang.String _cod_gruppo(Gruppo object) /*-{
+    return object.@com.cesaco.myprinterp.client.shared.Gruppo::cod_gruppo;
   }-*/;
   
   

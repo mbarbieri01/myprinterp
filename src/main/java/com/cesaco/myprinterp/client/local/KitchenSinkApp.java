@@ -139,8 +139,10 @@ public class KitchenSinkApp {
 
 	public void addForm1() {
 		CentralPanel centralPanel = new CentralPanel();
-		centralPanel.setNorth((IsWidget) new GruppoFormClient(gruppoService));
-		centralPanel.setSouth((IsWidget) new GruppoGrid(gruppoService));
+		GruppoFormClient gfc = new GruppoFormClient(gruppoService);
+		GWT.log("GruppoFormClient hash = "+gfc.hashCode());
+		centralPanel.setNorth((IsWidget) gfc);
+		centralPanel.setSouth((IsWidget) new GruppoGrid(gruppoService, gfc));
 		advTabPanel.addTab(centralPanel, "AT_GRUPPO");
 	}
 

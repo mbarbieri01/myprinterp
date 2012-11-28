@@ -9,7 +9,6 @@ package com.cesaco.myprinterp.client.grids;
  */
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.jboss.errai.bus.client.api.ErrorCallback;
@@ -18,16 +17,13 @@ import org.jboss.errai.bus.client.api.RemoteCallback;
 import org.jboss.errai.ioc.client.api.Caller;
 
 import com.cesaco.myprinterp.client.data.model.GruppoProperties;
-import com.cesaco.myprinterp.client.data.model.PostProperties;
+import com.cesaco.myprinterp.client.forms.GruppoFormClient;
 import com.cesaco.myprinterp.client.shared.Gruppo;
 import com.cesaco.myprinterp.client.shared.GruppoService;
-import com.google.gwt.cell.client.DateCell;
-import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
-import com.google.gwt.i18n.client.DateTimeFormat;
-import com.google.gwt.i18n.client.DateTimeFormat.PredefinedFormat;
+import com.google.gwt.editor.client.SimpleBeanEditorDriver;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -35,7 +31,6 @@ import com.google.gwt.user.client.ui.Widget;
 import com.sencha.gxt.core.client.IdentityValueProvider;
 import com.sencha.gxt.data.client.loader.RpcProxy;
 import com.sencha.gxt.data.shared.ListStore;
-import com.sencha.gxt.data.shared.ModelKeyProvider;
 import com.sencha.gxt.data.shared.loader.LoadResultListStoreBinding;
 import com.sencha.gxt.data.shared.loader.PagingLoadConfig;
 import com.sencha.gxt.data.shared.loader.PagingLoadResult;
@@ -44,11 +39,12 @@ import com.sencha.gxt.widget.core.client.FramedPanel;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData;
 import com.sencha.gxt.widget.core.client.event.RefreshEvent;
+import com.sencha.gxt.widget.core.client.event.SelectEvent;
+import com.sencha.gxt.widget.core.client.event.SelectEvent.SelectHandler;
 import com.sencha.gxt.widget.core.client.grid.CheckBoxSelectionModel;
 import com.sencha.gxt.widget.core.client.grid.ColumnConfig;
 import com.sencha.gxt.widget.core.client.grid.ColumnModel;
 import com.sencha.gxt.widget.core.client.grid.Grid;
-import com.sencha.gxt.widget.core.client.info.Info;
 import com.sencha.gxt.widget.core.client.selection.SelectionChangedEvent;
 import com.sencha.gxt.widget.core.client.selection.SelectionChangedEvent.SelectionChangedHandler;
 import com.sencha.gxt.widget.core.client.toolbar.PagingToolBar;
@@ -56,15 +52,24 @@ import com.sencha.gxt.widget.core.client.toolbar.PagingToolBar;
 public class GruppoGrid implements IsWidget {
 
 	private Caller<GruppoService> gruppoService;
+	private GruppoFormClient gruppoForm;
+	
+	private Grid<Gruppo> grid;
 
 	public void onModuleLoad() {
 		RootPanel.get().add(this);
 	}
 
-	public GruppoGrid(Caller<GruppoService> gruppoService) {
+	public GruppoGrid(Caller<GruppoService> gruppoService, GruppoFormClient gruppoForm) {
 		this.gruppoService = gruppoService;
+		this.gruppoForm = gruppoForm;
 	}
+	
+	interface GruppoDriver extends SimpleBeanEditorDriver<Gruppo, GruppoFormClient> {
+	  }
 
+	private final GruppoDriver itemDriver = GWT.create(GruppoDriver.class);
+	
 	@Override
 	public Widget asWidget() {
 
@@ -77,7 +82,7 @@ public class GruppoGrid implements IsWidget {
 
 			}
 		};
-
+		
 		GruppoProperties props = GWT.create(GruppoProperties.class);
 
 		ListStore<Gruppo> store = new ListStore<Gruppo>(props.abbr());
@@ -92,6 +97,8 @@ public class GruppoGrid implements IsWidget {
 		toolBar.getElement().getStyle().setProperty("borderBottom", "none");
 		toolBar.bind(loader);
 
+		itemDriver.initialize(gruppoForm);
+		
 		IdentityValueProvider<Gruppo> identity = new IdentityValueProvider<Gruppo>();
 		final CheckBoxSelectionModel<Gruppo> sm = new CheckBoxSelectionModel<Gruppo>(
 				identity) {
@@ -119,7 +126,7 @@ public class GruppoGrid implements IsWidget {
 		ColumnModel<Gruppo> cm = new ColumnModel<Gruppo>(l);
 		
 
-		Grid<Gruppo> grid = new Grid<Gruppo>(store, cm) {
+		grid  = new Grid<Gruppo>(store, cm) {
 			@Override
 			protected void onAfterFirstAttach() {
 				super.onAfterFirstAttach();
@@ -143,10 +150,19 @@ public class GruppoGrid implements IsWidget {
 	        	  GWT.log("Selezionato: "+event.getSelection().get(0).getCod_gruppo());
 	        	  //##############
 	        	  //DOMANI LAVORI DA QUI!!!!!! edit MODEL nella FORM!!!!
-	            //edit(event.getSelection().get(0));
+	            edit(event.getSelection().get(0));
 	          } else {
-	            //stockEditor.setSaveEnabled(false);
+	            gruppoForm.setSaveEnabled(false);
 	          }
+	        }
+	      });
+		
+		gruppoForm.getSaveButton().addSelectHandler(new SelectHandler() {
+			 
+	        @Override
+	        public void onSelect(SelectEvent event) {
+	          saveCurrentStock();
+	 
 	        }
 	      });
 		
@@ -167,6 +183,22 @@ public class GruppoGrid implements IsWidget {
 
 		return cp;
 	}
+	
+	protected void edit(Gruppo gruppo) {
+	    itemDriver.edit(gruppo);
+	    gruppoForm.setSaveEnabled(true);
+	  }
+	 
+	  protected void saveCurrentStock() {
+	    Gruppo edited = itemDriver.flush();
+	    if (!itemDriver.hasErrors()) {
+	    
+	      gruppoForm.setSaveEnabled(false);
+	      GWT.log("from GruppoGrid, hashcode: "+gruppoForm.hashCode());
+	      gruppoForm.update(edited);
+	      grid.getStore().update(edited);
+	    }
+	  }
 
 	private class PagingLoadResultImpl<T> implements PagingLoadResult<T> {
 

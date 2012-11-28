@@ -42,6 +42,25 @@ public class GruppoServiceImpl implements GruppoService {
   @Inject @New
   private Event<Gruppo> newGruppoEvent;
 
+  
+  @Override
+  public void update(Gruppo newGruppo) {
+	  log.info("Updating " + newGruppo.getCod_gruppo());
+	    try {
+	      userTransaction.begin();
+	      em.merge(newGruppo);
+	      userTransaction.commit();
+	    } catch (Exception ex) {
+	      try {
+	        userTransaction.rollback();
+	      } catch (Exception e) {
+	        e.printStackTrace();
+	      }
+	      throw new RuntimeException("Updating the member failed: "+ex.toString());
+	    }
+	    //newGruppoEvent.fire(newGruppo);
+  }
+  
   @Override
   public void register(Gruppo newGruppo) {
     log.info("Registering " + newGruppo.getCod_gruppo());

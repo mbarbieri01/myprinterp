@@ -150,13 +150,13 @@ public class GwtValidatorImpl extends com.google.gwt.validation.client.impl.Abst
     checkNotNull(object, "object");
     checkNotNull(groups, "groups");
     checkGroups(groups);
-    if (object instanceof com.cesaco.myprinterp.client.shared.Macchina) {
-      return com.cesaco.myprinterp.client.shared._MacchinaValidator.INSTANCE
-          .validate(context, (com.cesaco.myprinterp.client.shared.Macchina) object, groups);
-    }
     if (object instanceof com.cesaco.myprinterp.client.shared.Member) {
       return com.cesaco.myprinterp.client.shared._MemberValidator.INSTANCE
           .validate(context, (com.cesaco.myprinterp.client.shared.Member) object, groups);
+    }
+    if (object instanceof com.cesaco.myprinterp.client.shared.Macchina) {
+      return com.cesaco.myprinterp.client.shared._MacchinaValidator.INSTANCE
+          .validate(context, (com.cesaco.myprinterp.client.shared.Macchina) object, groups);
     }
     if (object instanceof com.cesaco.myprinterp.client.shared.Gruppo) {
       return com.cesaco.myprinterp.client.shared._GruppoValidator.INSTANCE

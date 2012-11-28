@@ -1,2 +1,0 @@
-com.cesaco.myprinterp.client.forms.MacchinaFormClient
-com.cesaco.myprinterp.client.forms.GruppoFormClient

@@ -1,1 +1,0 @@
-var Kne='1695';_=wnd.prototype;_.ae=function And(){var a,b;XLd[b=++YLd]=And;ZLd[b]=DXd+rke,a=(ZLd[b]=DXd+rke,cjd(),(ZLd[b]=CXd+pQd,cjd()),(ZLd[b]=CXd+lNd,bjd));(ZLd[b]=uMd+vMd,!(ZLd[b]=DXd+I_d,(ZLd[b]=DXd+Kne,a).i))&&((ZLd[b]=DXd+Kne,a).i=(ZLd[b]=DXd+Tie,new (ZLd[b]=DXd+Tie,Dod)((ZLd[b]=DXd+Kne,a))));gkb((ZLd[b]=DXd+ske,a).i);YLd=b-1};WLd(Rt)(3);
