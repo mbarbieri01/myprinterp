@@ -59,6 +59,24 @@ public class MacchinaServiceImpl implements MacchinaService {
     }
     newMacchinaEvent.fire(newMacchina);
   }
+  
+  @Override
+  public void update(Macchina newMacchina) {
+    log.info("Updating " + newMacchina.getCod_macchina());
+    try {
+      userTransaction.begin();
+      em.merge(newMacchina);
+      userTransaction.commit();
+    } catch (Exception ex) {
+      try {
+        userTransaction.rollback();
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+      throw new RuntimeException("Updating the member failed: "+ex.toString());
+    }
+    newMacchinaEvent.fire(newMacchina);
+  }
 
   @Override
   public List<Macchina> retrieveAllMacchinaOrderedByName() {

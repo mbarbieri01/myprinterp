@@ -13,11 +13,11 @@ import org.jboss.errai.bus.client.api.Message;
 import org.jboss.errai.bus.client.api.RemoteCallback;
 import org.jboss.errai.ioc.client.api.Caller;
 
+import com.cesaco.myprinterp.client.data.model.GruppoProperties;
 import com.cesaco.myprinterp.client.shared.Gruppo;
 import com.cesaco.myprinterp.client.shared.GruppoService;
 import com.cesaco.myprinterp.client.shared.Macchina;
 import com.cesaco.myprinterp.client.shared.MacchinaService;
-import com.cesaco.myprinterp.client.data.model.GruppoProperties;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
@@ -61,13 +61,13 @@ public class MacchinaFormClient extends Composite {
 
 	public Widget asWidget() {
 		if (vp == null) {
-		      vp = new VerticalPanel();
-		      vp.setSpacing(0);
-		      vp.setWidth("100%");
-		      vp.setHeight("200px");
-		      createForm();
-		    }
-		    return vp;
+			vp = new VerticalPanel();
+			vp.setSpacing(0);
+			vp.setWidth("100%");
+			vp.setHeight("200px");
+			createForm();
+		}
+		return vp;
 	}
 
 	public MacchinaFormClient(Caller<MacchinaService> macchinaService,
@@ -92,7 +92,7 @@ public class MacchinaFormClient extends Composite {
 			vp = new VerticalPanel();
 			vp.setSpacing(0);
 			vp.setWidth("100%");
-		      vp.setHeight("200px");
+			vp.setHeight("200px");
 			createForm();
 		}
 
@@ -115,15 +115,13 @@ public class MacchinaFormClient extends Composite {
 	private Label cod_gruppoError;
 	private Label registerConfirmMessage;
 
-	
-
 	private ListStore<Gruppo> gruppi;
 
 	private void createForm() {
 		// ac = new Actions();
 		FramedPanel form = new FramedPanel();
 		form.setWidth("100%");
-		 
+
 		tempGruppoList = new ArrayList<Gruppo>();
 
 		form.setHeaderVisible(false);
@@ -186,12 +184,12 @@ public class MacchinaFormClient extends Composite {
 		GruppoProperties propsGruppo = GWT.create(GruppoProperties.class);
 		// Combo box
 		gruppi = new ListStore<Gruppo>(propsGruppo.abbr());
-		GWT.log("MacchinaFormClient. gruppi.size = "+gruppi.size());
+		GWT.log("MacchinaFormClient. gruppi.size = " + gruppi.size());
 		// !!! devo popolare la lista di gruppi!!!!!!
 		// ###################
 		getAllGruppo();
 
-		//gruppi.addAll(ac.getGruppoList());
+		// gruppi.addAll(ac.getGruppoList());
 		// ################
 
 		comboGruppi = new ComboBox<Gruppo>(gruppi, propsGruppo.name());

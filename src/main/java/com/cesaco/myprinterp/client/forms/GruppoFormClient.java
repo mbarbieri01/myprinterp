@@ -82,19 +82,12 @@ public class GruppoFormClient implements IsWidget, Editor<Gruppo> {
 			vp.setHeight("200px");
 			createForm();
 		}
-		// initWidget(vp);
-		// PopupPanel pp = new PopupPanel();
-		// pp.add(this);
-		// pp.center();
-		// pp.setGlassEnabled(true);
-		// pp.show();
+
 	}
 
 	private Label cod_gruppoError;
 	private Label des_gruppoError;
 	private Label registerConfirmMessage;
-
-	final Actions ac = new Actions();
 
 	private void createForm() {
 		FramedPanel form = new FramedPanel();
@@ -153,45 +146,22 @@ public class GruppoFormClient implements IsWidget, Editor<Gruppo> {
 		save.setEnabled(false);
 		form.addButton(save);
 		form.addButton(insert);
-		// form.addButton(new TextButton("Salva", new
-		// SelectEvent.SelectHandler() {
-		//
-		// @Override
-		// public void onSelect(SelectEvent event) {
-		// registerConfirmMessage.setText("Sto inserendo.");
-		// Info.display("pressed","OK");
-		//
-		// ac.registerGruppo();
-		// //closeForm();
-		//
-		// }
-		// }
-		// ));
-
 		form.addButton(new TextButton("Annulla"));
 
 		vp.add(form);
 	}
 
 	public void registerGruppo(Gruppo newGruppo) {
-		registerConfirmMessage.setText("sono nel registerGruppo");
-		Info.display("ERROR1", "inizio registerGruppo");
-		//Gruppo newGruppo = new Gruppo();
-		//newGruppo.setCod_gruppo(cod_gruppo.getText());
-		//newGruppo.setDes_gruppo(des_gruppo.getText());
-		Info.display("ERROR2", "inizio registerGruppo");
+
 		cod_gruppoError.setText("");
 		des_gruppoError.setText("");
-		Info.display("ERROR3", "inizio registerGruppo");
-
-		// //////ERRORE qui
+		
 		Validator validator = Validation.buildDefaultValidatorFactory()
 				.getValidator();
-		Info.display("ERROR3b", "creato validator");
+
 		Set<ConstraintViolation<Gruppo>> violations = validator
 				.validate(newGruppo);
-		// ///////####
-		Info.display("ERROR4", "inizio registerGruppo");
+
 		for (ConstraintViolation<Gruppo> cv : violations) {
 			String prop = cv.getPropertyPath().toString();
 			if (prop.equals("cod_gruppo")) {
@@ -203,10 +173,9 @@ public class GruppoFormClient implements IsWidget, Editor<Gruppo> {
 			}
 		}
 
-		Info.display("ERROR5", "ci sono problemi sul validator: Gruppo.class");
 		if (!violations.isEmpty())
 			return;
-		Info.display("ERROR6", "validation not empty");
+
 		gruppoService.call(new RemoteCallback<Void>() {
 			@Override
 			public void callback(Void response) {
@@ -228,37 +197,17 @@ public class GruppoFormClient implements IsWidget, Editor<Gruppo> {
 		}).register(newGruppo);
 	}
 
-	private class Actions {
-
-		// private void closeForm() {
-		// super.removeFromParent();
-		// }
-
-		private void registerGruppo() {
-
-		}
-
-	}
-
 	public void update(Gruppo newGruppo) {
-		registerConfirmMessage.setText("sono nel registerGruppo");
-		Info.display("ERROR1", "inizio updateGruppo");
-		//Gruppo newGruppo = new Gruppo();
-		//newGruppo.setCod_gruppo(cod_gruppo.getText());
-		//newGruppo.setDes_gruppo(des_gruppo.getText());
-		Info.display("ERROR2", "inizio updateGruppo");
+
 		cod_gruppoError.setText("");
 		des_gruppoError.setText("");
-		Info.display("ERROR3", "inizio updateGruppo");
 
-		// //////ERRORE qui
 		Validator validator = Validation.buildDefaultValidatorFactory()
 				.getValidator();
-		Info.display("ERROR3b", "creato validator");
+
 		Set<ConstraintViolation<Gruppo>> violations = validator
 				.validate(newGruppo);
-		// ///////####
-		Info.display("ERROR4", "inizio updateGruppo");
+
 		for (ConstraintViolation<Gruppo> cv : violations) {
 			String prop = cv.getPropertyPath().toString();
 			if (prop.equals("cod_gruppo")) {
@@ -270,10 +219,9 @@ public class GruppoFormClient implements IsWidget, Editor<Gruppo> {
 			}
 		}
 
-		Info.display("ERROR5", "ci sono problemi sul validator: Gruppo.class");
 		if (!violations.isEmpty())
 			return;
-		Info.display("ERROR6", "validation not empty");
+
 		gruppoService.call(new RemoteCallback<Void>() {
 			@Override
 			public void callback(Void response) {
@@ -293,6 +241,6 @@ public class GruppoFormClient implements IsWidget, Editor<Gruppo> {
 				return false;
 			}
 		}).update(newGruppo);
-		
+
 	}
 }

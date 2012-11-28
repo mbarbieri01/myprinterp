@@ -10,7 +10,7 @@ public class CentralPanel implements IsWidget {
 
 	private IsWidget north;
 	private IsWidget south;
-	
+
 	private NorthSouthContainer nsc;
 
 	public IsWidget getNorth() {
@@ -27,11 +27,11 @@ public class CentralPanel implements IsWidget {
 
 	public void setSouth(IsWidget south) {
 		this.south = south;
-	
+
 	}
 
 	public void onModuleLoad() {
-		RootPanel.get().add(asWidget());	
+		RootPanel.get().add(asWidget());
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class CentralPanel implements IsWidget {
 		nsc = new NorthSouthContainer();
 		if (north != null) {
 			nsc.setNorthWidget(north);
-			
+
 		}
 		if (south != null) {
 			nsc.setSouthWidget(south);

@@ -1,14 +1,5 @@
 package com.cesaco.myprinterp.client.local;
 
-/**
- * Sencha GXT 3.0.1 - Sencha for GWT
- * Copyright(c) 2007-2012, Sencha, Inc.
- * licensing@sencha.com
- *
- * http://www.sencha.com/products/gxt/license/
- */
-
-
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.sencha.gxt.core.client.util.Margins;
@@ -20,12 +11,10 @@ import com.sencha.gxt.widget.core.client.container.SimpleContainer;
 import com.sencha.gxt.widget.core.client.container.Viewport;
 
 public class BaseLayoutEntry implements IsWidget {
-	
+
 	private StatusBar statusBar;
 	private MenuBar menuBar;
 	private AdvTabPanel advTabPanel;
-	
-	
 
 	public AdvTabPanel getAdvTabPanel() {
 		return advTabPanel;
@@ -36,7 +25,7 @@ public class BaseLayoutEntry implements IsWidget {
 	}
 
 	private AccordionLayout accordionPanel;
-	
+
 	public AccordionLayout getAccordionPanel() {
 		return accordionPanel;
 	}
@@ -81,19 +70,15 @@ public class BaseLayoutEntry implements IsWidget {
 		ContentPanel south = new ContentPanel();
 		south.setBorders(false);
 		south.setHeaderVisible(false);
-		
-		
 
 		west.add(accordionPanel);
 
 		north.add(menuBar);
-		
+
 		center.setResize(false);
 		center.add(advTabPanel);
-		
-		south.add(statusBar);
 
-		
+		south.add(statusBar);
 
 		BorderLayoutData northData = new BorderLayoutData(100);
 		northData.setMargins(new Margins(5));
@@ -129,8 +114,7 @@ public class BaseLayoutEntry implements IsWidget {
 		Viewport viewport = new Viewport();
 		viewport.setPosition(0, 0);
 		viewport.add(simple);
-		
-		
+
 		return viewport;
 	}
 
@@ -138,9 +122,6 @@ public class BaseLayoutEntry implements IsWidget {
 		Widget con = asWidget();
 		Viewport viewport = new Viewport();
 		viewport.add(con);
-		
-		//RootPanel.get().add(viewport);
 	}
 
 }
-

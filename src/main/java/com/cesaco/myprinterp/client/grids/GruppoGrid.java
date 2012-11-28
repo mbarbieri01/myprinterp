@@ -1,13 +1,5 @@
 package com.cesaco.myprinterp.client.grids;
 
-/**
- * Sencha GXT 3.0.1 - Sencha for GWT
- * Copyright(c) 2007-2012, Sencha, Inc.
- * licensing@sencha.com
- *
- * http://www.sencha.com/products/gxt/license/
- */
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,23 +45,25 @@ public class GruppoGrid implements IsWidget {
 
 	private Caller<GruppoService> gruppoService;
 	private GruppoFormClient gruppoForm;
-	
+
 	private Grid<Gruppo> grid;
 
 	public void onModuleLoad() {
 		RootPanel.get().add(this);
 	}
 
-	public GruppoGrid(Caller<GruppoService> gruppoService, GruppoFormClient gruppoForm) {
+	public GruppoGrid(Caller<GruppoService> gruppoService,
+			GruppoFormClient gruppoForm) {
 		this.gruppoService = gruppoService;
 		this.gruppoForm = gruppoForm;
 	}
-	
-	interface GruppoDriver extends SimpleBeanEditorDriver<Gruppo, GruppoFormClient> {
-	  }
+
+	interface GruppoDriver extends
+			SimpleBeanEditorDriver<Gruppo, GruppoFormClient> {
+	}
 
 	private final GruppoDriver itemDriver = GWT.create(GruppoDriver.class);
-	
+
 	@Override
 	public Widget asWidget() {
 
@@ -82,7 +76,7 @@ public class GruppoGrid implements IsWidget {
 
 			}
 		};
-		
+
 		GruppoProperties props = GWT.create(GruppoProperties.class);
 
 		ListStore<Gruppo> store = new ListStore<Gruppo>(props.abbr());
@@ -98,14 +92,12 @@ public class GruppoGrid implements IsWidget {
 		toolBar.bind(loader);
 
 		itemDriver.initialize(gruppoForm);
-		
+
 		IdentityValueProvider<Gruppo> identity = new IdentityValueProvider<Gruppo>();
 		final CheckBoxSelectionModel<Gruppo> sm = new CheckBoxSelectionModel<Gruppo>(
 				identity) {
 			@Override
 			protected void onRefresh(RefreshEvent event) {
-				// this code selects all rows when paging if the header checkbox
-				// is selected
 				if (isSelectAllChecked()) {
 					selectAll();
 				}
@@ -124,9 +116,8 @@ public class GruppoGrid implements IsWidget {
 		l.add(des_gruppoColumn);
 
 		ColumnModel<Gruppo> cm = new ColumnModel<Gruppo>(l);
-		
 
-		grid  = new Grid<Gruppo>(store, cm) {
+		grid = new Grid<Gruppo>(store, cm) {
 			@Override
 			protected void onAfterFirstAttach() {
 				super.onAfterFirstAttach();
@@ -143,33 +134,34 @@ public class GruppoGrid implements IsWidget {
 		grid.setLoadMask(true);
 		grid.setLoader(loader);
 		grid.setHeight("100%");
-		grid.getSelectionModel().addSelectionChangedHandler(new SelectionChangedHandler<Gruppo>() {
-	        @Override
-	        public void onSelectionChanged(SelectionChangedEvent<Gruppo> event) {
-	          if (event.getSelection().size() > 0) {
-	        	  GWT.log("Selezionato: "+event.getSelection().get(0).getCod_gruppo());
-	        	  //##############
-	        	  //DOMANI LAVORI DA QUI!!!!!! edit MODEL nella FORM!!!!
-	            edit(event.getSelection().get(0));
-	          } else {
-	            gruppoForm.setSaveEnabled(false);
-	          }
-	        }
-	      });
-		
+		grid.getSelectionModel().addSelectionChangedHandler(
+				new SelectionChangedHandler<Gruppo>() {
+					@Override
+					public void onSelectionChanged(
+							SelectionChangedEvent<Gruppo> event) {
+						if (event.getSelection().size() > 0) {
+							GWT.log("Selezionato: "
+									+ event.getSelection().get(0)
+											.getCod_gruppo());
+							edit(event.getSelection().get(0));
+						} else {
+							gruppoForm.setSaveEnabled(false);
+						}
+					}
+				});
+
 		gruppoForm.getSaveButton().addSelectHandler(new SelectHandler() {
-			 
-	        @Override
-	        public void onSelect(SelectEvent event) {
-	          saveCurrentStock();
-	 
-	        }
-	      });
-		
+
+			@Override
+			public void onSelect(SelectEvent event) {
+				saveCurrentStock();
+
+			}
+		});
+
 		FramedPanel cp = new FramedPanel();
 		cp.setCollapsible(false);
 		cp.setHeaderVisible(false);
-		//cp.setPixelSize(500, 200);
 		cp.setHeight("250px");
 		cp.addStyleName("margin-10");
 
@@ -179,26 +171,25 @@ public class GruppoGrid implements IsWidget {
 		con.add(toolBar, new VerticalLayoutData(1, -1));
 		cp.setBorders(false);
 		cp.setWidget(con);
-		
 
 		return cp;
 	}
-	
+
 	protected void edit(Gruppo gruppo) {
-	    itemDriver.edit(gruppo);
-	    gruppoForm.setSaveEnabled(true);
-	  }
-	 
-	  protected void saveCurrentStock() {
-	    Gruppo edited = itemDriver.flush();
-	    if (!itemDriver.hasErrors()) {
-	    
-	      gruppoForm.setSaveEnabled(false);
-	      GWT.log("from GruppoGrid, hashcode: "+gruppoForm.hashCode());
-	      gruppoForm.update(edited);
-	      grid.getStore().update(edited);
-	    }
-	  }
+		itemDriver.edit(gruppo);
+		gruppoForm.setSaveEnabled(true);
+	}
+
+	protected void saveCurrentStock() {
+		Gruppo edited = itemDriver.flush();
+		if (!itemDriver.hasErrors()) {
+
+			gruppoForm.setSaveEnabled(false);
+			GWT.log("from GruppoGrid, hashcode: " + gruppoForm.hashCode());
+			gruppoForm.update(edited);
+			grid.getStore().update(edited);
+		}
+	}
 
 	private class PagingLoadResultImpl<T> implements PagingLoadResult<T> {
 

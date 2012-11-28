@@ -10,11 +10,16 @@ package com.cesaco.myprinterp.client.local.images;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.resources.client.ClientBundle.Source;
 
-public interface ExampleImages extends ClientBundle {
+public interface Resources extends ClientBundle {
 
-  public ExampleImages INSTANCE = GWT.create(ExampleImages.class);
+  public Resources INSTANCE = GWT.create(Resources.class);
 
+  
+  @Source("logo2.png")
+  ImageResource logo();
+  
   @Source("add16.gif")
   ImageResource add16();
 
