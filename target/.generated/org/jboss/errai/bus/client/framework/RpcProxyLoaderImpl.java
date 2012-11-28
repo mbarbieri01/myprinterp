@@ -76,6 +76,14 @@ public class RpcProxyLoaderImpl implements RpcProxyLoader {
         }
       }
 
+      public void update(Macchina a0) {
+        if (errorCallback == null) {
+          MessageBuilder.createCall().call("com.cesaco.myprinterp.client.shared.MacchinaService").endpoint("update:com.cesaco.myprinterp.client.shared.Macchina:", qualifiers, new Object[] { a0 }).respondTo(void.class, remoteCallback).defaultErrorHandling().sendNowWith(bus);
+        } else {
+          MessageBuilder.createCall().call("com.cesaco.myprinterp.client.shared.MacchinaService").endpoint("update:com.cesaco.myprinterp.client.shared.Macchina:", qualifiers, new Object[] { a0 }).respondTo(void.class, remoteCallback).errorsHandledBy(errorCallback).sendNowWith(bus);
+        }
+      }
+
       public List retrieveAllMacchinaOrderedByName() {
         if (errorCallback == null) {
           MessageBuilder.createCall().call("com.cesaco.myprinterp.client.shared.MacchinaService").endpoint("retrieveAllMacchinaOrderedByName:", qualifiers, new Object[] { }).respondTo(List.class, remoteCallback).defaultErrorHandling().sendNowWith(bus);
